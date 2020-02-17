@@ -1027,6 +1027,17 @@ static struct device_node *qcom_smd_match_channel(struct device_node *edge_node,
 	return NULL;
 }
 
+static bool qcom_smd_initiate_open(struct qcom_smd_channel *channel)
+{
+	struct device_node *np;
+
+	np = qcom_smd_match_channel(channel->edge->of_node, channel->name);
+	if (!np)
+		return false;
+
+	return of_property_read_bool(np, "qcom,smd-initiate-open");
+}
+
 static int qcom_smd_announce_create(struct rpmsg_device *rpdev)
 {
 	struct qcom_smd_endpoint *qept = to_smd_endpoint(rpdev->ept);
@@ -1281,12 +1292,20 @@ static void qcom_channel_state_worker(struct work_struct *work)
 
 	/*
 	 * Register a device for any closed channel where the remote processor
-	 * is showing interest in opening the channel.
+	 * is showing interest in opening the channel unless we are told to
+	 * initiate open first.
 	 */
 	spin_lock_irqsave(&edge->channels_lock, flags);
 	list_for_each_entry(channel, &edge->channels, list) {
 		if (channel->state != SMD_CHANNEL_CLOSED)
 			continue;
+
+		if (qcom_smd_initiate_open(channel)) {
+			SET_TX_CHANNEL_INFO(channel, state, SMD_CHANNEL_OPENING);
+			SET_TX_CHANNEL_FLAG(channel, fSTATE, 1);
+
+			qcom_smd_signal_channel(channel);
+		}
 
 		remote_state = GET_RX_CHANNEL_INFO(channel, state);
 		if (remote_state != SMD_CHANNEL_OPENING &&
