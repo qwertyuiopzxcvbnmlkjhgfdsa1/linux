@@ -304,6 +304,7 @@ struct ipa_data {
 	const struct ipa_clock_data *clock_data;
 };
 
+extern const struct ipa_data ipa_data_msm8953;
 extern const struct ipa_data ipa_data_sdm845;
 extern const struct ipa_data ipa_data_sc7180;
 

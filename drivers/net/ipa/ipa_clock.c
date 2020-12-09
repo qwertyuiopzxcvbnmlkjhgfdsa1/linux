@@ -96,6 +96,8 @@ err_return:
 /* Inverse of ipa_interconnect_init() */
 static void ipa_interconnect_exit(struct ipa_clock *clock)
 {
+	if (!clock->interconnect_data)
+		return;
 	icc_put(clock->config_path);
 	icc_put(clock->imem_path);
 	icc_put(clock->memory_path);
@@ -107,6 +109,9 @@ static int ipa_interconnect_enable(struct ipa *ipa)
 	const struct ipa_interconnect_data *data;
 	struct ipa_clock *clock = ipa->clock;
 	int ret;
+
+	if (ipa->version == IPA_VERSION_2_6L)
+		return 0;
 
 	data = &clock->interconnect_data[IPA_INTERCONNECT_MEMORY];
 	ret = icc_set_bw(clock->memory_path, data->average_rate,
@@ -189,7 +194,8 @@ static int ipa_clock_enable(struct ipa *ipa)
 static void ipa_clock_disable(struct ipa *ipa)
 {
 	clk_disable_unprepare(ipa->clock->core);
-	(void)ipa_interconnect_disable(ipa);
+	if (ipa->version != IPA_VERSION_2_6L)
+		(void)ipa_interconnect_disable(ipa);
 }
 
 /* Get an IPA clock reference, but only if the reference count is
@@ -288,7 +294,8 @@ ipa_clock_init(struct device *dev, const struct ipa_clock_data *data)
 	clock->core = clk;
 	clock->interconnect_data = data->interconnect;
 
-	ret = ipa_interconnect_init(clock, dev);
+	if (clock->interconnect_data)
+		ret = ipa_interconnect_init(clock, dev);
 	if (ret)
 		goto err_kfree;
 
