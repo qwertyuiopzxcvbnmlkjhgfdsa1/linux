@@ -121,6 +121,7 @@ struct ipa_endpoint_rx_data {
  */
 struct ipa_endpoint_config_data {
 	u32 resource_group;
+	bool skip_config;
 	bool checksum;
 	bool qmap;
 	bool aggregation;
@@ -170,6 +171,7 @@ struct ipa_gsi_endpoint_data {
 	u8 ee_id;		/* enum gsi_ee_id */
 	u8 channel_id;
 	u8 endpoint_id;
+	const char *channel_name; /* used only for SPS */
 	bool toward_ipa;
 
 	struct gsi_channel_data channel;
