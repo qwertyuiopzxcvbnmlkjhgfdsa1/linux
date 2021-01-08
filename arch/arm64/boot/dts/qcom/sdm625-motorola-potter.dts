@@ -290,7 +290,8 @@
 
 &dsi0 {
 	panel: panel@0 {
-		compatible = "boe,bs052fhm-a00-6c01";
+		/* We expect the bootloader to adjust the panel compatible string */
+		compatible = "motorola,potter-panel";
 		reg = <0>;
 
 		backlight = <&pmi8950_wled>;
