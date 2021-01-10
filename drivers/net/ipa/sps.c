@@ -208,6 +208,7 @@ static void sps_channel_update(struct sps_channel *channel)
 		if (trans_status == DMA_COMPLETE)
 			break;
 	}
+
 	/* Get the transaction for the latest completed event.  Take a
 	 * reference to keep it from completing before we give the events
 	 * for this and previous transactions back to the hardware.
@@ -301,16 +302,15 @@ static void sps_channel_setup_one(struct sps *sps, u32 channel_id)
 	if (!channel->sps)
 		return;	/* Ignore uninitialized channels */
 
-	if (channel->toward_ipa) {
+	if (channel->toward_ipa)
 		netif_tx_napi_add(&sps->dummy_dev, &channel->napi,
 				  sps_channel_poll, NAPI_POLL_WEIGHT);
-		napi_schedule(&channel->napi);
-	} else {
+	else
 		netif_napi_add(&sps->dummy_dev, &channel->napi,
 			       sps_channel_poll, NAPI_POLL_WEIGHT);
-		napi_schedule(&channel->napi);
-	}
+
 	napi_enable(&channel->napi);
+	/*TODO: investigate NAPI */
 }
 
 static void sps_channel_teardown_one(struct sps *sps, u32 channel_id)

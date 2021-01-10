@@ -92,6 +92,22 @@ struct ipa_trans *sps_channel_trans_alloc(struct sps *sps, u32 channel_id,
 	return trans;
 }
 
+void sps_trans_callback(void *arg)
+{
+	struct ipa_trans *trans = arg;
+
+	/* If the entire SGL was mapped when added, unmap it now */
+	if (trans->direction != DMA_NONE)
+		dma_unmap_sg(trans->sps->dev, trans->sgl, trans->used,
+			     trans->direction);
+
+	ipa_gsi_trans_complete(trans);
+
+	complete(&trans->completion);
+
+	ipa_trans_free(trans);
+}
+
 void __sps_trans_commit(struct ipa_trans *trans)
 {
 	struct sps_channel *channel = &trans->sps->channel[trans->channel_id];
@@ -126,8 +142,17 @@ void __sps_trans_commit(struct ipa_trans *trans)
 			dma_flags |= DMA_PREP_IMM_CMD;
 		}
 
+		if (last_tre)
+			dma_flags |= DMA_PREP_INTERRUPT;
+
 		desc = dmaengine_prep_slave_single(channel->chan, addr, len,
 				direction, dma_flags);
+
+		if (last_tre) {
+			/*TODO: use NAPI */
+			desc->callback = sps_trans_callback;
+			desc->callback_param = trans;
+		}
 
 		desc->cookie = dmaengine_submit(desc);
 
