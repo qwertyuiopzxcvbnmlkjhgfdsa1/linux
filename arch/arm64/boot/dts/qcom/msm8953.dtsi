@@ -1984,12 +1984,12 @@
 			clocks = <&rpmcc RPM_SMD_IPA_CLK>;
 			clock-names = "core";
 
-			/*interconnects = <&snoc MAS_IPA &bimc SLV_EBI>,
+			interconnects = <&snoc MAS_IPA &bimc SLV_EBI>,
 				        <&snoc MAS_IPA &snoc SLV_IMEM>,
 					<&bimc MAS_APPS_PROC &pcnoc SLV_IPA_CFG>;
 			interconnect-names = "memory",
 					     "imem",
-					     "config";*/
+					     "config";
 
 			dmas = <&ipa_bam 2>, <&ipa_bam 3>, <&ipa_bam 4>, <&ipa_bam 5>,
 			       <&ipa_bam 6>, <&ipa_bam 7>, <&ipa_bam 8>, <&ipa_bam 9>;
