@@ -236,6 +236,96 @@ static void ipa_server_driver_init_complete(struct qmi_handle *qmi,
 	}
 }
 
+static void ipa_config_req_handler(struct qmi_handle *qmi,
+				   struct sockaddr_qrtr *sq,
+				   struct qmi_txn *txn,
+				   const void *decoded)
+{
+	struct ipa_config_rsp rsp = { };
+	struct ipa_qmi *ipa_qmi;
+	struct ipa *ipa;
+	int ret;
+
+	ipa_qmi = container_of(qmi, struct ipa_qmi, server_handle);
+	ipa = container_of(ipa_qmi, struct ipa, qmi);
+
+	dev_info(&ipa->pdev->dev, "handling config req\n");
+
+	rsp.rsp.result = QMI_RESULT_SUCCESS_V01;
+	rsp.rsp.error = QMI_ERR_NONE_V01;
+
+	ret = qmi_send_response(qmi, sq, txn, IPA_QMI_DRIVER_INIT_COMPLETE,
+				IPA_QMI_DRIVER_INIT_COMPLETE_RSP_SZ,
+				ipa_driver_init_complete_rsp_ei, &rsp);
+	if (!ret) {
+		ipa_qmi->uc_ready = true;
+		ipa_qmi_ready(ipa_qmi);		/* We might be ready now */
+	} else {
+		dev_err(&ipa->pdev->dev,
+			"error %d sending init complete response\n", ret);
+	}
+}
+
+static void ipa_install_filter_handler(struct qmi_handle *qmi,
+				       struct sockaddr_qrtr *sq,
+				       struct qmi_txn *txn,
+				       const void *decoded)
+{
+	struct ipa_install_fltr_rule_rsp rsp = { };
+	struct ipa_qmi *ipa_qmi;
+	struct ipa *ipa;
+	int ret;
+
+	ipa_qmi = container_of(qmi, struct ipa_qmi, server_handle);
+	ipa = container_of(ipa_qmi, struct ipa, qmi);
+
+	dev_info(&ipa->pdev->dev, "handling filter install\n");
+
+	rsp.rsp.result = QMI_RESULT_SUCCESS_V01;
+	rsp.rsp.error = QMI_ERR_NONE_V01;
+
+	ret = qmi_send_response(qmi, sq, txn, IPA_QMI_DRIVER_INIT_COMPLETE,
+				IPA_QMI_DRIVER_INIT_COMPLETE_RSP_SZ,
+				ipa_driver_init_complete_rsp_ei, &rsp);
+	if (!ret) {
+		ipa_qmi->uc_ready = true;
+		ipa_qmi_ready(ipa_qmi);		/* We might be ready now */
+	} else {
+		dev_err(&ipa->pdev->dev,
+			"error %d sending init complete response\n", ret);
+	}
+}
+
+static void ipa_qmi_notify_filter_installed(struct qmi_handle *qmi,
+					    struct sockaddr_qrtr *sq,
+					    struct qmi_txn *txn,
+					    const void *decoded)
+{
+	struct ipa_fltr_installed_notif_rsp rsp = { };
+	struct ipa_qmi *ipa_qmi;
+	struct ipa *ipa;
+	int ret;
+
+	ipa_qmi = container_of(qmi, struct ipa_qmi, server_handle);
+	ipa = container_of(ipa_qmi, struct ipa, qmi);
+
+	dev_info(&ipa->pdev->dev, "modem requested filter install notifier");
+
+	rsp.rsp.result = QMI_RESULT_SUCCESS_V01;
+	rsp.rsp.error = QMI_ERR_NONE_V01;
+
+	ret = qmi_send_response(qmi, sq, txn, IPA_QMI_DRIVER_INIT_COMPLETE,
+				IPA_QMI_DRIVER_INIT_COMPLETE_RSP_SZ,
+				ipa_driver_init_complete_rsp_ei, &rsp);
+	if (!ret) {
+		ipa_qmi->uc_ready = true;
+		ipa_qmi_ready(ipa_qmi);		/* We might be ready now */
+	} else {
+		dev_err(&ipa->pdev->dev,
+			"error %d sending init complete response\n", ret);
+	}
+}
+
 /* The server handles two request message types sent by the modem. */
 static const struct qmi_msg_handler ipa_server_msg_handlers[] = {
 	{
@@ -251,6 +341,27 @@ static const struct qmi_msg_handler ipa_server_msg_handlers[] = {
 		.ei		= ipa_driver_init_complete_req_ei,
 		.decoded_size	= IPA_QMI_DRIVER_INIT_COMPLETE_REQ_SZ,
 		.fn		= ipa_server_driver_init_complete,
+	},
+	{
+		.type		= QMI_REQUEST,
+		.msg_id		= IPA_QMI_CONFIG_REQUEST,
+		.ei		= ipa_config_req_ei,
+		.decoded_size	= IPA_QMI_CONFIG_REQ_SZ,
+		.fn		= ipa_config_req_handler,
+	},
+	{
+		.type		= QMI_REQUEST,
+		.msg_id		= IPA_QMI_INSTALL_FILTER_RULE,
+		.ei		= ipa_install_fltr_rule_req_ei,
+		.decoded_size	= IPA_QMI_INSTALL_FILTER_RULE_REQ_SZ,
+		.fn		= ipa_install_filter_handler,
+	},
+	{
+		.type		= QMI_REQUEST,
+		.msg_id		= IPA_QMI_NOTIFY_FILTER_INSTALLED,
+		.ei		= ipa_qmi_notify_filter_installed_ei,
+		.decoded_size	= IPA_QMI_NOTIFY_FILTER_INSTALLED_REQ_SZ,
+		.fn		= ipa_qmi_notify_filter_installed,
 	},
 };
 
