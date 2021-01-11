@@ -1009,6 +1009,7 @@ static void ipa_endpoint_status(struct ipa_endpoint *endpoint)
 	iowrite32(val, ipa->reg_virt + offset);
 }
 
+#define IPA_HEADROOM	128
 static int ipa_endpoint_replenish_one(struct ipa_endpoint *endpoint)
 {
 	struct ipa_trans *trans;
@@ -1558,8 +1559,9 @@ void ipa_endpoint_disable_one(struct ipa_endpoint *endpoint)
 
 	if (!endpoint->toward_ipa) {
 		ipa_endpoint_replenish_disable(endpoint);
+		/*TODO:
 		ipa_interrupt_suspend_disable(ipa->interrupt,
-					      endpoint->endpoint_id);
+					      endpoint->endpoint_id);*/
 	}
 
 	/* No stopping channels on IPA version 2.6L */
