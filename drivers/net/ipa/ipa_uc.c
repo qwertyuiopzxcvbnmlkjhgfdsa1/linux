@@ -116,6 +116,7 @@ enum ipa_uc_command {
 	IPA_UC_COMMAND_MEMCPY		= 0x7,
 	IPA_UC_COMMAND_RESET_PIPE	= 0x8,
 	IPA_UC_COMMAND_REG_WRITE	= 0x9,
+	IPA_UC_COMMAND_HOLB_MONITOR	= 0x9,
 	IPA_UC_COMMAND_GSI_CH_EMPTY	= 0xa,
 };
 
@@ -133,6 +134,10 @@ enum ipa_uc_event {
 	IPA_UC_EVENT_ERROR		= 0x1,
 	IPA_UC_EVENT_LOG_INFO		= 0x2,
 };
+
+#define IPA_CMD_MONITOR_HOLB_FIELD	GENMASK(23, 16)
+
+void ipa_uc_monitor_holb(struct ipa *ipa, bool enable);
 
 static struct ipa_v2_uc_mem_area *ipa_v2_uc_shared(struct ipa *ipa)
 {
@@ -193,7 +198,11 @@ static void ipa_uc_response_hdlr(struct ipa *ipa, enum ipa_irq_id irq_id)
 	switch (response) {
 	case IPA_UC_RESPONSE_INIT_COMPLETED:
 		ipa->uc_loaded = true;
+		ipa_uc_monitor_holb(ipa, true);
 		ipa_clock_put(ipa);
+		break;
+	case IPA_UC_RESPONSE_CMD_COMPLETED:
+		/* We don't do anything on command completion yet */
 		break;
 	default:
 		dev_warn(&ipa->pdev->dev,
@@ -258,6 +267,21 @@ static void send_uc_command(struct ipa *ipa, u32 command, u32 command_param)
 	val = u32_encode_bits(1, UC_INTR_FMASK);
 
 	iowrite32(val, ipa->reg_virt + ipa_reg_irq_uc_offset(ipa->version));
+}
+
+void ipa_uc_monitor_holb(struct ipa *ipa, bool enable)
+{
+	u8 monitor_holb = enable ? 1 : 0;
+	/* The endpoint id is always that of the AP_USB_RX pipe, 0
+	 * The least significant 16 bits are reserved and set to 0
+	 */
+	u32 param = u32_encode_bits(monitor_holb, IPA_CMD_MONITOR_HOLB_FIELD);
+
+	/* HOLB monitoring is only used on IPA v2.6L */
+	if (ipa->version != IPA_VERSION_2_6L)
+		return;
+
+	send_uc_command(ipa, IPA_UC_COMMAND_HOLB_MONITOR, param);
 }
 
 /* Tell the microcontroller the AP is shutting down */
