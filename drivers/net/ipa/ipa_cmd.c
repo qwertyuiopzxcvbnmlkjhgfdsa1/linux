@@ -726,10 +726,10 @@ static void ipa_cmd_ip_tag_status_add(struct ipa_trans *trans, u64 tag)
 
 	if (trans->gsi) {
 		ipa = container_of(trans->gsi, struct ipa, gsi);
-		tag_mask = IPA_V2_IP_PACKET_TAG_STATUS_TAG_FMASK;
+		tag_mask = IPA_V3_IP_PACKET_TAG_STATUS_TAG_FMASK;
 	} else {
 		ipa = container_of(trans->sps, struct ipa, sps);
-		tag_mask = IPA_V3_IP_PACKET_TAG_STATUS_TAG_FMASK;
+		tag_mask = IPA_V2_IP_PACKET_TAG_STATUS_TAG_FMASK;
 	}
 
 	/* assert(tag <= field_max(IP_PACKET_TAG_STATUS_TAG_FMASK)); */
