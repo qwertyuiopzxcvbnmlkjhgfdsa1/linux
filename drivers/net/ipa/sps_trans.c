@@ -101,6 +101,16 @@ void sps_trans_callback(void *arg)
 		dma_unmap_sg(trans->sps->dev, trans->sgl, trans->used,
 			     trans->direction);
 
+	/* FIXME
+	 * On downstream, the length of the DMA is got from the BAM HW descriptor
+	 * On mainline, this is not yet supported (the BAM driver  needs a
+	 * dma_metadata_client implementation. Until I implement that,
+	 * I'm hardcoding 8128 here, which is the size of the buffer we share with
+	 * the IPA hardware for each packet. This could mean potentially invalid
+	 * packets would be parsed and created, so this should be fixed ASAP
+	 */
+	trans->len = 8128;
+
 	ipa_gsi_trans_complete(trans);
 
 	complete(&trans->completion);
