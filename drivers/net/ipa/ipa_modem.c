@@ -215,6 +215,7 @@ int ipa_modem_start(struct ipa *ipa)
 
 	ipa->name_map[IPA_ENDPOINT_AP_MODEM_TX]->netdev = netdev;
 	ipa->name_map[IPA_ENDPOINT_AP_MODEM_RX]->netdev = netdev;
+	ipa->name_map[IPA_ENDPOINT_AP_LAN_RX]->netdev = netdev;
 
 	priv = netdev_priv(netdev);
 	priv->ipa = ipa;
