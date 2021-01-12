@@ -77,7 +77,7 @@ int ipa_mem_setup(struct ipa *ipa)
 		 * modem header memory. There is no AP_HEADER either, but since we
 		 * only care about its size, and not region, its fine.
 		 */
-		trans = ipa_cmd_trans_alloc(ipa, 1);
+		trans = ipa_cmd_trans_alloc(ipa, 4);
 		if (!trans) {
 			dev_err(&ipa->pdev->dev, "no transaction for memory setup\n");
 			return -EBUSY;
@@ -92,7 +92,11 @@ int ipa_mem_setup(struct ipa *ipa)
 
 		ipa_cmd_hdr_init_local_add(trans, offset, size, addr);
 
-		//ipa_mem_zero_region_add(trans, &ipa->mem[IPA_MEM_MODEM]);
+		ipa_mem_zero_region_add(trans, &ipa->mem[IPA_MEM_MODEM]);
+
+		ipa_mem_zero_region_add(trans, &ipa->mem[IPA_MEM_MODEM_HEADER]);
+
+		ipa_mem_zero_region_add(trans, &ipa->mem[IPA_MEM_ZIP]);
 
 		ipa_trans_commit_wait(trans);
 
@@ -274,6 +278,73 @@ void ipa_mem_deconfig(struct ipa *ipa)
 	ipa->zero_size = 0;
 	ipa->zero_virt = NULL;
 	ipa->zero_addr = 0;
+}
+
+/**
+ * ipa_mem_add_header() - Add a header to the IPA AP header memory
+ * @ipa:	IPA pointer
+ * @header:	The raw header
+ * @len: 	The lenght of the header
+ *
+ * The IPA hardware looks at the headers to understand what to do with each
+ * packet. A QMAP header tells it which port to mux. The QMAP headers are the
+ * only type of headers we care about for now
+ * The IPA hardware expects us to write all the rules to a region in RAM, and then
+ * give it the base address of this region.
+ */
+
+void ipa_mem_commit_header(struct ipa *ipa)
+{
+	struct ipa_trans *trans;
+
+	trans = ipa_cmd_trans_alloc(ipa, 1);
+
+	ipa_cmd_hdr_init_system_add(trans, ipa->header_addr);
+
+	ipa_trans_commit_wait(trans);
+}
+
+int ipa_mem_header_setup(struct ipa *ipa)
+{
+	u8 hdr[8] = { };
+
+	/* First header is 0
+	 * Second header's first byte is the QMAP id, 1
+	 * The remaining bytes are 0
+	 */
+	hdr[5] = 1;
+	memcpy(ipa->header_virt, hdr, 8);
+
+	dev_info(&ipa->pdev->dev, "Sending IPA headers to hw\n");
+	ipa_mem_commit_header(ipa);
+
+	return 0;
+}
+
+int ipa_mem_header_init(struct ipa *ipa)
+{
+	struct device *dev = &ipa->pdev->dev;
+	dma_addr_t addr;
+	void *virt;
+
+	virt = dma_alloc_coherent(dev, ipa->mem[IPA_MEM_AP_HEADER].ram_size,
+				&addr, GFP_KERNEL);
+	if (!virt) {
+		dev_err(dev, "Failed to alloc memory for AP header\n");
+		return -ENOMEM;
+	}
+
+	ipa->header_virt = virt;
+	ipa->header_addr = addr;
+
+	return 0;
+}
+
+void ipa_mem_header_exit(struct ipa *ipa)
+{
+	struct device *dev = &ipa->pdev->dev;
+
+	dma_free_coherent(dev, IPA_MEM_MAX, ipa->header_virt, ipa->header_addr);
 }
 
 /**

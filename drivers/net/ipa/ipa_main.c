@@ -941,14 +941,17 @@ static int ipa_probe(struct platform_device *pdev)
 	if (ret)
 		goto err_endpoint_exit;
 
-	if (ipa->version != IPA_VERSION_2_6L)
-		ret = ipa_modem_init(ipa, modem_init);
+	ret = ipa_modem_init(ipa, modem_init);
 	if (ret)
 		goto err_table_exit;
 
 	ret = ipa_config(ipa, data);
 	if (ret)
 		goto err_modem_exit;
+
+	ret = ipa_mem_header_init(ipa);
+	if (ret)
+		goto err_deconfig;
 
 	dev_info(dev, "IPA driver initialized");
 
@@ -966,14 +969,16 @@ static int ipa_probe(struct platform_device *pdev)
 	if (ipa->version != IPA_VERSION_2_6L)
 		ret = ipa_firmware_load(dev);
 	if (ret)
-		goto err_deconfig;
+		goto err_mem_header_exit;
 
 	ret = ipa_setup(ipa);
 	if (ret)
-		goto err_deconfig;
+		goto err_mem_header_exit;
 
 	return 0;
 
+err_mem_header_exit:
+	ipa_mem_header_exit(ipa);
 err_deconfig:
 	ipa_deconfig(ipa);
 err_modem_exit:

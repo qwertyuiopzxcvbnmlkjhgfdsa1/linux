@@ -34,6 +34,7 @@ enum ipa_cmd_opcode {
 	IPA_CMD_IP_V4_ROUTING_INIT	= 0x7,
 	IPA_CMD_IP_V6_ROUTING_INIT	= 0x8,
 	IPA_CMD_HDR_INIT_LOCAL		= 0x9,
+	IPA_CMD_HDR_INIT_SYSTEM		= 0xa,
 	IPA_CMD_REGISTER_WRITE		= 0xc,
 	IPA_CMD_IP_PACKET_INIT		= 0x10,
 	IPA_CMD_DMA_SHARED_MEM		= 0x13,
@@ -138,6 +139,15 @@ void ipa_v2_cmd_table_init_add(struct ipa_trans *trans, enum ipa_cmd_opcode opco
  */
 void ipa_cmd_hdr_init_local_add(struct ipa_trans *trans, u32 offset, u16 size,
 				dma_addr_t addr);
+
+/**
+ * ipa_cmd_hdr_init_system_add() - Add a header init command to a transaction
+ * @ipa:	IPA structure
+ * @addr:	DMA address of buffer to be written from
+ *
+ * Defines and fills the location in IPA memory to use for headers.
+ */
+void ipa_cmd_hdr_init_system_add(struct ipa_trans *trans, dma_addr_t addr);
 
 /**
  * ipa_cmd_register_write_add() - Add a register write command to a transaction

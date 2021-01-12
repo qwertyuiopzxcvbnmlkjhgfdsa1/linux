@@ -218,6 +218,9 @@ int ipa_smp2p_init(struct ipa *ipa, bool modem_init)
 	u32 valid_bit;
 	int ret;
 
+	if (ipa->version == IPA_VERSION_2_6L)
+		return 0;
+
 	valid_state = qcom_smem_state_get(dev, "ipa-clock-enabled-valid",
 					  &valid_bit);
 	if (IS_ERR(valid_state))

@@ -91,6 +91,9 @@ struct ipa {
 	struct ipa_smp2p *smp2p;
 	struct ipa_clock *clock;
 
+	dma_addr_t header_addr;
+	void *header_virt;
+
 	dma_addr_t table_addr;
 	__le64 *table_virt;
 

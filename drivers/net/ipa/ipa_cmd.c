@@ -64,7 +64,7 @@ struct ipa_v2_cmd_hdr_init_local {
 };
 
 /* IPA_CMD_HDR_INIT_SYSTEM */
-struct ipa_cmd_hdr_init_system {
+struct ipa_v2_cmd_hdr_init_system {
 	__le32 hdr_table_addr;
 	__le32 reserved;
 };
@@ -198,6 +198,7 @@ struct ipa_cmd_ip_packet_tag_status {
 /* Immediate command payload */
 union ipa_cmd_payload {
 	struct ipa_v2_cmd_hdr_init_local hdr_init_local_v2;
+	struct ipa_v2_cmd_hdr_init_system hdr_init_system_v2;
 	struct ipa_v2_cmd_register_write register_write_v2;
 	struct ipa_v2_cmd_hw_dma_mem_mem dma_shared_mem_v2;
 	struct ipa_v2_cmd_hw_ipv4_fltrt_init table_init_ipv4_ipa_v2;
@@ -526,6 +527,38 @@ void ipa_cmd_hdr_init_local_add(struct ipa_trans *trans, u32 offset, u16 size,
 		ipa_trans_cmd_add(trans, payload, sizeof(*payload),
 				payload_addr, direction, opcode);
 	}
+}
+
+void ipa_v2_cmd_hdr_init_system_add(struct ipa_trans *trans, dma_addr_t addr)
+{
+	struct ipa *ipa = container_of(trans->sps, struct ipa, sps);
+	struct ipa_v2_cmd_hdr_init_system *payload;
+	union ipa_cmd_payload *cmd_payload;
+	enum dma_data_direction direction = DMA_TO_DEVICE;
+	dma_addr_t payload_addr;
+	u32 opcode = IPA_CMD_HDR_INIT_SYSTEM;
+
+	cmd_payload = ipa_cmd_payload_alloc(ipa, &payload_addr);
+	payload = &cmd_payload->hdr_init_system_v2;
+
+	payload->hdr_table_addr = cpu_to_le32(addr);
+
+	ipa_trans_cmd_add(trans, payload, sizeof(*payload), payload_addr,
+			direction, opcode);
+}
+
+void ipa_v3_cmd_hdr_init_system_add(struct ipa_trans *trans, dma_addr_t addr)
+{
+	/* TODO */
+	return;
+}
+
+void ipa_cmd_hdr_init_system_add(struct ipa_trans *trans, dma_addr_t addr)
+{
+	if (trans->gsi)
+		ipa_v3_cmd_hdr_init_system_add(trans, addr);
+	else
+		ipa_v2_cmd_hdr_init_system_add(trans, addr);
 }
 
 void ipa_v2_cmd_register_write_add(struct ipa_trans *trans, u32 offset, u32 value,

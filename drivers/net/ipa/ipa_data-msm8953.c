@@ -140,6 +140,10 @@ static const struct ipa_mem ipa_mem_local_data[] = {
 		.size		= 0x003c,
 		.canary_count	= 1,
 	},
+	[IPA_MEM_AP_HEADER] = {
+		/* This memory segment only exists in RAM */
+		.ram_size	= 0x800,
+	},
 	[IPA_MEM_MODEM_HEADER] = {
 		.offset		= 0x03c8,
 		.size		= 0x0140,
