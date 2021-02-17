@@ -495,7 +495,7 @@ static int csid_set_clock_rates(struct csid_device *csid)
 			if (j == clock->nfreqs) {
 				dev_err(dev,
 					"Pixel clock is too high for CSID\n");
-				return -EINVAL;
+				j = clock->nfreqs - 1;
 			}
 
 			/* if sensor pixel clock is not available */

@@ -132,7 +132,7 @@ static int csiphy_set_clock_rates(struct csiphy_device *csiphy)
 			if (j == clock->nfreqs) {
 				dev_err(dev,
 					"Pixel clock is too high for CSIPHY\n");
-				return -EINVAL;
+				j = clock->nfreqs - 1;
 			}
 
 			/* if sensor pixel clock is not available */
