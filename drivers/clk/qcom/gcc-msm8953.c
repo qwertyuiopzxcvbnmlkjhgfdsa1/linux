@@ -4196,15 +4196,18 @@ static const struct qcom_cc_desc gcc_msm8953_desc = {
 static int gcc_msm8953_probe(struct platform_device *pdev)
 {
 	struct regmap *regmap;
+	int ret;
 
 	regmap  = qcom_cc_map(pdev, &gcc_msm8953_desc);
 	if (IS_ERR(regmap))
 		return PTR_ERR(regmap);
 
-	clk_agera_pll_configure(&gpll3_early, regmap,
-				&gpll3_early_config);
+	ret = qcom_cc_really_probe(pdev, &gcc_msm8953_desc, regmap);
 
-	return qcom_cc_really_probe(pdev, &gcc_msm8953_desc, regmap);
+	clk_set_rate(gpll3_early.clkr.hw.clk,
+			19200000 * 68);
+
+	return ret;
 }
 
 static const struct of_device_id gcc_msm8953_match_table[] = {
