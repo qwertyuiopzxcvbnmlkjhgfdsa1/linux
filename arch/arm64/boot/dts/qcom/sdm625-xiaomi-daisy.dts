@@ -174,9 +174,9 @@
 
 		backlight = <&pmi8950_wled>;
 
-		supply-names = "ibb", "lab";
-		lab-supply = <&lab_vreg>;
-		ibb-supply = <&ibb_vreg>;
+		supply-names = "vsp", "vsn";
+		vsp-supply = <&lab_vreg>;
+		vsn-supply = <&ibb_vreg>;
 
 		pinctrl-names = "default", "sleep";
 		pinctrl-0 = <&pmx_mdss_default &mdss_te_default>;
