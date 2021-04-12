@@ -83,7 +83,7 @@ static struct clk_alpha_pll_postdiv gpll0 = {
 };
 
 static struct clk_alpha_pll gpll2_early = {
-	.offset = 0x4A000,
+	.offset = 0x4a000,
 	.regs = clk_alpha_pll_regs[CLK_ALPHA_PLL_TYPE_DEFAULT],
 	.clkr = {
 		.enable_reg = 0x45000,
@@ -100,7 +100,7 @@ static struct clk_alpha_pll gpll2_early = {
 };
 
 static struct clk_alpha_pll_postdiv gpll2 = {
-	.offset = 0x4A000,
+	.offset = 0x4a000,
 	.regs = clk_alpha_pll_regs[CLK_ALPHA_PLL_TYPE_DEFAULT],
 	.clkr.hw.init = &(struct clk_init_data){
 		.name = "gpll2",
@@ -333,7 +333,7 @@ static const struct freq_tbl ftbl_blsp_i2c_apps_clk_src[] = {
 };
 
 static struct clk_rcg2 blsp1_qup1_i2c_apps_clk_src = {
-	.cmd_rcgr = 0x0200C,
+	.cmd_rcgr = 0x0200c,
 	.hid_width = 5,
 	.freq_tbl = ftbl_blsp_i2c_apps_clk_src,
 	.parent_map = gcc_xo_gpll0_gpll0div2_2_map,
@@ -385,7 +385,7 @@ static struct clk_rcg2 blsp1_qup4_i2c_apps_clk_src = {
 };
 
 static struct clk_rcg2 blsp2_qup1_i2c_apps_clk_src = {
-	.cmd_rcgr = 0x0C00C,
+	.cmd_rcgr = 0x0c00c,
 	.hid_width = 5,
 	.freq_tbl = ftbl_blsp_i2c_apps_clk_src,
 	.parent_map = gcc_xo_gpll0_gpll0div2_2_map,
@@ -398,7 +398,7 @@ static struct clk_rcg2 blsp2_qup1_i2c_apps_clk_src = {
 };
 
 static struct clk_rcg2 blsp2_qup2_i2c_apps_clk_src = {
-	.cmd_rcgr = 0x0D000,
+	.cmd_rcgr = 0x0d000,
 	.hid_width = 5,
 	.freq_tbl = ftbl_blsp_i2c_apps_clk_src,
 	.parent_map = gcc_xo_gpll0_gpll0div2_2_map,
@@ -411,7 +411,7 @@ static struct clk_rcg2 blsp2_qup2_i2c_apps_clk_src = {
 };
 
 static struct clk_rcg2 blsp2_qup3_i2c_apps_clk_src = {
-	.cmd_rcgr = 0x0F000,
+	.cmd_rcgr = 0x0f000,
 	.hid_width = 5,
 	.freq_tbl = ftbl_blsp_i2c_apps_clk_src,
 	.parent_map = gcc_xo_gpll0_gpll0div2_2_map,
@@ -505,7 +505,7 @@ static struct clk_rcg2 blsp1_qup4_spi_apps_clk_src = {
 };
 
 static struct clk_rcg2 blsp2_qup1_spi_apps_clk_src = {
-	.cmd_rcgr = 0x0C024,
+	.cmd_rcgr = 0x0c024,
 	.hid_width = 5,
 	.mnd_width = 8,
 	.freq_tbl = ftbl_blsp_spi_apps_clk_src,
@@ -519,7 +519,7 @@ static struct clk_rcg2 blsp2_qup1_spi_apps_clk_src = {
 };
 
 static struct clk_rcg2 blsp2_qup2_spi_apps_clk_src = {
-	.cmd_rcgr = 0x0D014,
+	.cmd_rcgr = 0x0d014,
 	.hid_width = 5,
 	.mnd_width = 8,
 	.freq_tbl = ftbl_blsp_spi_apps_clk_src,
@@ -533,7 +533,7 @@ static struct clk_rcg2 blsp2_qup2_spi_apps_clk_src = {
 };
 
 static struct clk_rcg2 blsp2_qup3_spi_apps_clk_src = {
-	.cmd_rcgr = 0x0F024,
+	.cmd_rcgr = 0x0f024,
 	.hid_width = 5,
 	.mnd_width = 8,
 	.freq_tbl = ftbl_blsp_spi_apps_clk_src,
@@ -609,7 +609,7 @@ static struct clk_rcg2 blsp1_uart2_apps_clk_src = {
 };
 
 static struct clk_rcg2 blsp2_uart1_apps_clk_src = {
-	.cmd_rcgr = 0x0C044,
+	.cmd_rcgr = 0x0c044,
 	.hid_width = 5,
 	.mnd_width = 16,
 	.freq_tbl = ftbl_blsp_uart_apps_clk_src,
@@ -623,7 +623,7 @@ static struct clk_rcg2 blsp2_uart1_apps_clk_src = {
 };
 
 static struct clk_rcg2 blsp2_uart2_apps_clk_src = {
-	.cmd_rcgr = 0x0D034,
+	.cmd_rcgr = 0x0d034,
 	.hid_width = 5,
 	.mnd_width = 16,
 	.freq_tbl = ftbl_blsp_uart_apps_clk_src,
@@ -655,7 +655,7 @@ static const struct clk_parent_data gcc_byte_data[] = {
 };
 
 static struct clk_rcg2 byte0_clk_src = {
-	.cmd_rcgr = 0x4D044,
+	.cmd_rcgr = 0x4d044,
 	.hid_width = 5,
 	.parent_map = gcc_byte0_map,
 	.clkr.hw.init = &(struct clk_init_data) {
@@ -668,7 +668,7 @@ static struct clk_rcg2 byte0_clk_src = {
 };
 
 static struct clk_rcg2 byte1_clk_src = {
-	.cmd_rcgr = 0x4D0B0,
+	.cmd_rcgr = 0x4d0b0,
 	.hid_width = 5,
 	.parent_map = gcc_byte1_map,
 	.clkr.hw.init = &(struct clk_init_data) {
@@ -739,7 +739,7 @@ static const struct freq_tbl ftbl_camss_top_ahb_clk_src[] = {
 };
 
 static struct clk_rcg2 camss_top_ahb_clk_src = {
-	.cmd_rcgr = 0x5A000,
+	.cmd_rcgr = 0x5a000,
 	.hid_width = 5,
 	.freq_tbl = ftbl_camss_top_ahb_clk_src,
 	.parent_map = gcc_xo_gpll0_gpll0div2_2_map,
@@ -876,7 +876,7 @@ static const struct freq_tbl ftbl_csi_clk_src[] = {
 };
 
 static struct clk_rcg2 csi0_clk_src = {
-	.cmd_rcgr = 0x4E020,
+	.cmd_rcgr = 0x4e020,
 	.hid_width = 5,
 	.freq_tbl = ftbl_csi_clk_src,
 	.parent_map = gcc_csi0_map,
@@ -889,7 +889,7 @@ static struct clk_rcg2 csi0_clk_src = {
 };
 
 static struct clk_rcg2 csi1_clk_src = {
-	.cmd_rcgr = 0x4F020,
+	.cmd_rcgr = 0x4f020,
 	.hid_width = 5,
 	.freq_tbl = ftbl_csi_clk_src,
 	.parent_map = gcc_csi12_map,
@@ -902,7 +902,7 @@ static struct clk_rcg2 csi1_clk_src = {
 };
 
 static struct clk_rcg2 csi2_clk_src = {
-	.cmd_rcgr = 0x3C020,
+	.cmd_rcgr = 0x3c020,
 	.hid_width = 5,
 	.freq_tbl = ftbl_csi_clk_src,
 	.parent_map = gcc_csi12_map,
@@ -966,7 +966,7 @@ static struct clk_rcg2 csi1p_clk_src = {
 };
 
 static struct clk_rcg2 csi2p_clk_src = {
-	.cmd_rcgr = 0x580A4,
+	.cmd_rcgr = 0x580a4,
 	.hid_width = 5,
 	.freq_tbl = ftbl_csi_p_clk_src,
 	.parent_map = gcc_csip_map,
@@ -986,7 +986,7 @@ static const struct freq_tbl ftbl_csi_phytimer_clk_src[] = {
 };
 
 static struct clk_rcg2 csi0phytimer_clk_src = {
-	.cmd_rcgr = 0x4E000,
+	.cmd_rcgr = 0x4e000,
 	.hid_width = 5,
 	.freq_tbl = ftbl_csi_phytimer_clk_src,
 	.parent_map = gcc_xo_gpll0_gpll0div2_2_map,
@@ -999,7 +999,7 @@ static struct clk_rcg2 csi0phytimer_clk_src = {
 };
 
 static struct clk_rcg2 csi1phytimer_clk_src = {
-	.cmd_rcgr = 0x4F000,
+	.cmd_rcgr = 0x4f000,
 	.hid_width = 5,
 	.freq_tbl = ftbl_csi_phytimer_clk_src,
 	.parent_map = gcc_xo_gpll0_gpll0div2_2_map,
@@ -1012,7 +1012,7 @@ static struct clk_rcg2 csi1phytimer_clk_src = {
 };
 
 static struct clk_rcg2 csi2phytimer_clk_src = {
-	.cmd_rcgr = 0x4F05C,
+	.cmd_rcgr = 0x4f05c,
 	.hid_width = 5,
 	.freq_tbl = ftbl_csi_phytimer_clk_src,
 	.parent_map = gcc_xo_gpll0_gpll0div2_2_map,
@@ -1040,7 +1040,7 @@ static const struct freq_tbl ftbl_esc0_1_clk_src[] = {
 };
 
 static struct clk_rcg2 esc0_clk_src = {
-	.cmd_rcgr = 0x4D05C,
+	.cmd_rcgr = 0x4d05c,
 	.hid_width = 5,
 	.freq_tbl = ftbl_esc0_1_clk_src,
 	.parent_map = gcc_esc_map,
@@ -1053,7 +1053,7 @@ static struct clk_rcg2 esc0_clk_src = {
 };
 
 static struct clk_rcg2 esc1_clk_src = {
-	.cmd_rcgr = 0x4D0A8,
+	.cmd_rcgr = 0x4d0a8,
 	.hid_width = 5,
 	.freq_tbl = ftbl_esc0_1_clk_src,
 	.parent_map = gcc_esc_map,
@@ -1143,7 +1143,7 @@ static struct clk_rcg2 gp2_clk_src = {
 };
 
 static struct clk_rcg2 gp3_clk_src = {
-	.cmd_rcgr = 0x0A004,
+	.cmd_rcgr = 0x0a004,
 	.hid_width = 5,
 	.mnd_width = 16,
 	.freq_tbl = ftbl_gp_clk_src,
@@ -1252,7 +1252,7 @@ static struct clk_rcg2 mclk1_clk_src = {
 };
 
 static struct clk_rcg2 mclk2_clk_src = {
-	.cmd_rcgr = 0x5C000,
+	.cmd_rcgr = 0x5c000,
 	.hid_width = 5,
 	.mnd_width = 8,
 	.freq_tbl = ftbl_mclk_clk_src,
@@ -1266,7 +1266,7 @@ static struct clk_rcg2 mclk2_clk_src = {
 };
 
 static struct clk_rcg2 mclk3_clk_src = {
-	.cmd_rcgr = 0x5E000,
+	.cmd_rcgr = 0x5e000,
 	.hid_width = 5,
 	.mnd_width = 8,
 	.freq_tbl = ftbl_mclk_clk_src,
@@ -1305,7 +1305,7 @@ static const struct freq_tbl ftbl_mdp_clk_src[] = {
 };
 
 static struct clk_rcg2 mdp_clk_src = {
-	.cmd_rcgr = 0x4D014,
+	.cmd_rcgr = 0x4d014,
 	.hid_width = 5,
 	.freq_tbl = ftbl_mdp_clk_src,
 	.parent_map = gcc_mdp_map,
@@ -1336,7 +1336,7 @@ static const struct clk_parent_data gcc_pclk_data[] = {
 };
 
 static struct clk_rcg2 pclk0_clk_src = {
-	.cmd_rcgr = 0x4D000,
+	.cmd_rcgr = 0x4d000,
 	.hid_width = 5,
 	.mnd_width = 8,
 	.parent_map = gcc_pclk0_map,
@@ -1350,7 +1350,7 @@ static struct clk_rcg2 pclk0_clk_src = {
 };
 
 static struct clk_rcg2 pclk1_clk_src = {
-	.cmd_rcgr = 0x4D0B8,
+	.cmd_rcgr = 0x4d0b8,
 	.hid_width = 5,
 	.mnd_width = 8,
 	.parent_map = gcc_pclk1_map,
@@ -1389,7 +1389,7 @@ static const struct freq_tbl ftbl_rbcpr_gfx_clk_src[] = {
 };
 
 static struct clk_rcg2 rbcpr_gfx_clk_src = {
-	.cmd_rcgr = 0x3A00C,
+	.cmd_rcgr = 0x3a00c,
 	.hid_width = 5,
 	.freq_tbl = ftbl_rbcpr_gfx_clk_src,
 	.parent_map = gcc_xo_gpll0_gpll0div2_4_map,
@@ -1423,7 +1423,7 @@ static const struct freq_tbl ftbl_sdcc1_ice_core_clk_src[] = {
 };
 
 static struct clk_rcg2 sdcc1_ice_core_clk_src = {
-	.cmd_rcgr = 0x5D000,
+	.cmd_rcgr = 0x5d000,
 	.hid_width = 5,
 	.freq_tbl = ftbl_sdcc1_ice_core_clk_src,
 	.parent_map = gcc_sdcc1_ice_core_map,
@@ -1511,7 +1511,7 @@ static const struct freq_tbl ftbl_usb30_master_clk_src[] = {
 };
 
 static struct clk_rcg2 usb30_master_clk_src = {
-	.cmd_rcgr = 0x3F00C,
+	.cmd_rcgr = 0x3f00c,
 	.hid_width = 5,
 	.freq_tbl = ftbl_usb30_master_clk_src,
 	.parent_map = gcc_xo_gpll0_gpll0div2_2_map,
@@ -1546,7 +1546,7 @@ static const struct freq_tbl ftbl_usb30_mock_utmi_clk_src[] = {
 };
 
 static struct clk_rcg2 usb30_mock_utmi_clk_src = {
-	.cmd_rcgr = 0x3F020,
+	.cmd_rcgr = 0x3f020,
 	.hid_width = 5,
 	.mnd_width = 8,
 	.freq_tbl = ftbl_usb30_mock_utmi_clk_src,
@@ -1575,7 +1575,7 @@ static const struct freq_tbl ftbl_usb3_aux_clk_src[] = {
 };
 
 static struct clk_rcg2 usb3_aux_clk_src = {
-	.cmd_rcgr = 0x3F05C,
+	.cmd_rcgr = 0x3f05c,
 	.hid_width = 5,
 	.mnd_width = 8,
 	.freq_tbl = ftbl_usb3_aux_clk_src,
@@ -1616,7 +1616,7 @@ static const struct freq_tbl ftbl_vcodec0_clk_src[] = {
 };
 
 static struct clk_rcg2 vcodec0_clk_src = {
-	.cmd_rcgr = 0x4C000,
+	.cmd_rcgr = 0x4c000,
 	.hid_width = 5,
 	.freq_tbl = ftbl_vcodec0_clk_src,
 	.parent_map = gcc_vcodec0_map,
@@ -1696,7 +1696,7 @@ static const struct freq_tbl ftbl_vsync_clk_src[] = {
 };
 
 static struct clk_rcg2 vsync_clk_src = {
-	.cmd_rcgr = 0x4D02C,
+	.cmd_rcgr = 0x4d02c,
 	.hid_width = 5,
 	.freq_tbl = ftbl_vsync_clk_src,
 	.parent_map = gcc_vsync_map,
@@ -1745,7 +1745,7 @@ static struct clk_branch gcc_apc1_droop_detector_gpll0_clk = {
 };
 
 static struct clk_branch gcc_apss_ahb_clk = {
-	.halt_reg = 0x4601C,
+	.halt_reg = 0x4601c,
 	.halt_check = BRANCH_HALT_VOTED,
 	.clkr = {
 		.enable_reg = 0x45004,
@@ -1779,7 +1779,7 @@ static struct clk_branch gcc_apss_tcu_async_clk = {
 	.halt_reg = 0x12018,
 	.halt_check = BRANCH_HALT_VOTED,
 	.clkr = {
-		.enable_reg = 0x4500C,
+		.enable_reg = 0x4500c,
 		.enable_mask = BIT(1),
 		.hw.init = &(struct clk_init_data) {
 			.name = "gcc_apss_tcu_async_clk",
@@ -1828,7 +1828,7 @@ static struct clk_branch gcc_blsp1_ahb_clk = {
 };
 
 static struct clk_branch gcc_blsp2_ahb_clk = {
-	.halt_reg = 0x0B008,
+	.halt_reg = 0x0b008,
 	.halt_check = BRANCH_HALT_VOTED,
 	.clkr = {
 		.enable_reg = 0x45004,
@@ -1913,10 +1913,10 @@ static struct clk_branch gcc_blsp1_qup4_i2c_apps_clk = {
 };
 
 static struct clk_branch gcc_blsp2_qup1_i2c_apps_clk = {
-	.halt_reg = 0x0C008,
+	.halt_reg = 0x0c008,
 	.halt_check = BRANCH_HALT,
 	.clkr = {
-		.enable_reg = 0x0C008,
+		.enable_reg = 0x0c008,
 		.enable_mask = BIT(0),
 		.hw.init = &(struct clk_init_data) {
 			.num_parents = 1,
@@ -1931,10 +1931,10 @@ static struct clk_branch gcc_blsp2_qup1_i2c_apps_clk = {
 };
 
 static struct clk_branch gcc_blsp2_qup2_i2c_apps_clk = {
-	.halt_reg = 0x0D010,
+	.halt_reg = 0x0d010,
 	.halt_check = BRANCH_HALT,
 	.clkr = {
-		.enable_reg = 0x0D010,
+		.enable_reg = 0x0d010,
 		.enable_mask = BIT(0),
 		.hw.init = &(struct clk_init_data) {
 			.num_parents = 1,
@@ -1949,10 +1949,10 @@ static struct clk_branch gcc_blsp2_qup2_i2c_apps_clk = {
 };
 
 static struct clk_branch gcc_blsp2_qup3_i2c_apps_clk = {
-	.halt_reg = 0x0F020,
+	.halt_reg = 0x0f020,
 	.halt_check = BRANCH_HALT,
 	.clkr = {
-		.enable_reg = 0x0F020,
+		.enable_reg = 0x0f020,
 		.enable_mask = BIT(0),
 		.hw.init = &(struct clk_init_data) {
 			.num_parents = 1,
@@ -2003,10 +2003,10 @@ static struct clk_branch gcc_blsp1_qup1_spi_apps_clk = {
 };
 
 static struct clk_branch gcc_blsp1_qup2_spi_apps_clk = {
-	.halt_reg = 0x0300C,
+	.halt_reg = 0x0300c,
 	.halt_check = BRANCH_HALT,
 	.clkr = {
-		.enable_reg = 0x0300C,
+		.enable_reg = 0x0300c,
 		.enable_mask = BIT(0),
 		.hw.init = &(struct clk_init_data) {
 			.num_parents = 1,
@@ -2021,10 +2021,10 @@ static struct clk_branch gcc_blsp1_qup2_spi_apps_clk = {
 };
 
 static struct clk_branch gcc_blsp1_qup3_spi_apps_clk = {
-	.halt_reg = 0x0401C,
+	.halt_reg = 0x0401c,
 	.halt_check = BRANCH_HALT,
 	.clkr = {
-		.enable_reg = 0x0401C,
+		.enable_reg = 0x0401c,
 		.enable_mask = BIT(0),
 		.hw.init = &(struct clk_init_data) {
 			.num_parents = 1,
@@ -2039,10 +2039,10 @@ static struct clk_branch gcc_blsp1_qup3_spi_apps_clk = {
 };
 
 static struct clk_branch gcc_blsp1_qup4_spi_apps_clk = {
-	.halt_reg = 0x0501C,
+	.halt_reg = 0x0501c,
 	.halt_check = BRANCH_HALT,
 	.clkr = {
-		.enable_reg = 0x0501C,
+		.enable_reg = 0x0501c,
 		.enable_mask = BIT(0),
 		.hw.init = &(struct clk_init_data) {
 			.num_parents = 1,
@@ -2057,10 +2057,10 @@ static struct clk_branch gcc_blsp1_qup4_spi_apps_clk = {
 };
 
 static struct clk_branch gcc_blsp2_qup1_spi_apps_clk = {
-	.halt_reg = 0x0C004,
+	.halt_reg = 0x0c004,
 	.halt_check = BRANCH_HALT,
 	.clkr = {
-		.enable_reg = 0x0C004,
+		.enable_reg = 0x0c004,
 		.enable_mask = BIT(0),
 		.hw.init = &(struct clk_init_data) {
 			.num_parents = 1,
@@ -2075,10 +2075,10 @@ static struct clk_branch gcc_blsp2_qup1_spi_apps_clk = {
 };
 
 static struct clk_branch gcc_blsp2_qup2_spi_apps_clk = {
-	.halt_reg = 0x0D00C,
+	.halt_reg = 0x0d00c,
 	.halt_check = BRANCH_HALT,
 	.clkr = {
-		.enable_reg = 0x0D00C,
+		.enable_reg = 0x0d00c,
 		.enable_mask = BIT(0),
 		.hw.init = &(struct clk_init_data) {
 			.num_parents = 1,
@@ -2093,10 +2093,10 @@ static struct clk_branch gcc_blsp2_qup2_spi_apps_clk = {
 };
 
 static struct clk_branch gcc_blsp2_qup3_spi_apps_clk = {
-	.halt_reg = 0x0F01C,
+	.halt_reg = 0x0f01c,
 	.halt_check = BRANCH_HALT,
 	.clkr = {
-		.enable_reg = 0x0F01C,
+		.enable_reg = 0x0f01c,
 		.enable_mask = BIT(0),
 		.hw.init = &(struct clk_init_data) {
 			.num_parents = 1,
@@ -2111,10 +2111,10 @@ static struct clk_branch gcc_blsp2_qup3_spi_apps_clk = {
 };
 
 static struct clk_branch gcc_blsp2_qup4_spi_apps_clk = {
-	.halt_reg = 0x1801C,
+	.halt_reg = 0x1801c,
 	.halt_check = BRANCH_HALT,
 	.clkr = {
-		.enable_reg = 0x1801C,
+		.enable_reg = 0x1801c,
 		.enable_mask = BIT(0),
 		.hw.init = &(struct clk_init_data) {
 			.num_parents = 1,
@@ -2129,10 +2129,10 @@ static struct clk_branch gcc_blsp2_qup4_spi_apps_clk = {
 };
 
 static struct clk_branch gcc_blsp1_uart1_apps_clk = {
-	.halt_reg = 0x0203C,
+	.halt_reg = 0x0203c,
 	.halt_check = BRANCH_HALT,
 	.clkr = {
-		.enable_reg = 0x0203C,
+		.enable_reg = 0x0203c,
 		.enable_mask = BIT(0),
 		.hw.init = &(struct clk_init_data) {
 			.num_parents = 1,
@@ -2147,10 +2147,10 @@ static struct clk_branch gcc_blsp1_uart1_apps_clk = {
 };
 
 static struct clk_branch gcc_blsp1_uart2_apps_clk = {
-	.halt_reg = 0x0302C,
+	.halt_reg = 0x0302c,
 	.halt_check = BRANCH_HALT,
 	.clkr = {
-		.enable_reg = 0x0302C,
+		.enable_reg = 0x0302c,
 		.enable_mask = BIT(0),
 		.hw.init = &(struct clk_init_data) {
 			.num_parents = 1,
@@ -2165,10 +2165,10 @@ static struct clk_branch gcc_blsp1_uart2_apps_clk = {
 };
 
 static struct clk_branch gcc_blsp2_uart1_apps_clk = {
-	.halt_reg = 0x0C03C,
+	.halt_reg = 0x0c03c,
 	.halt_check = BRANCH_HALT,
 	.clkr = {
-		.enable_reg = 0x0C03C,
+		.enable_reg = 0x0c03c,
 		.enable_mask = BIT(0),
 		.hw.init = &(struct clk_init_data) {
 			.num_parents = 1,
@@ -2183,10 +2183,10 @@ static struct clk_branch gcc_blsp2_uart1_apps_clk = {
 };
 
 static struct clk_branch gcc_blsp2_uart2_apps_clk = {
-	.halt_reg = 0x0D02C,
+	.halt_reg = 0x0d02c,
 	.halt_check = BRANCH_HALT,
 	.clkr = {
-		.enable_reg = 0x0D02C,
+		.enable_reg = 0x0d02c,
 		.enable_mask = BIT(0),
 		.hw.init = &(struct clk_init_data) {
 			.num_parents = 1,
@@ -2201,7 +2201,7 @@ static struct clk_branch gcc_blsp2_uart2_apps_clk = {
 };
 
 static struct clk_branch gcc_boot_rom_ahb_clk = {
-	.halt_reg = 0x1300C,
+	.halt_reg = 0x1300c,
 	.halt_check = BRANCH_HALT_VOTED,
 	.clkr = {
 		.enable_reg = 0x45004,
@@ -2227,10 +2227,10 @@ static struct clk_branch gcc_camss_ahb_clk = {
 };
 
 static struct clk_branch gcc_camss_cci_ahb_clk = {
-	.halt_reg = 0x5101C,
+	.halt_reg = 0x5101c,
 	.halt_check = BRANCH_HALT,
 	.clkr = {
-		.enable_reg = 0x5101C,
+		.enable_reg = 0x5101c,
 		.enable_mask = BIT(0),
 		.hw.init = &(struct clk_init_data) {
 			.num_parents = 1,
@@ -2294,10 +2294,10 @@ static struct clk_branch gcc_camss_cpp_axi_clk = {
 };
 
 static struct clk_branch gcc_camss_cpp_clk = {
-	.halt_reg = 0x5803C,
+	.halt_reg = 0x5803c,
 	.halt_check = BRANCH_HALT,
 	.clkr = {
-		.enable_reg = 0x5803C,
+		.enable_reg = 0x5803c,
 		.enable_mask = BIT(0),
 		.hw.init = &(struct clk_init_data) {
 			.num_parents = 1,
@@ -2312,10 +2312,10 @@ static struct clk_branch gcc_camss_cpp_clk = {
 };
 
 static struct clk_branch gcc_camss_csi0_ahb_clk = {
-	.halt_reg = 0x4E040,
+	.halt_reg = 0x4e040,
 	.halt_check = BRANCH_HALT,
 	.clkr = {
-		.enable_reg = 0x4E040,
+		.enable_reg = 0x4e040,
 		.enable_mask = BIT(0),
 		.hw.init = &(struct clk_init_data) {
 			.num_parents = 1,
@@ -2330,10 +2330,10 @@ static struct clk_branch gcc_camss_csi0_ahb_clk = {
 };
 
 static struct clk_branch gcc_camss_csi1_ahb_clk = {
-	.halt_reg = 0x4F040,
+	.halt_reg = 0x4f040,
 	.halt_check = BRANCH_HALT,
 	.clkr = {
-		.enable_reg = 0x4F040,
+		.enable_reg = 0x4f040,
 		.enable_mask = BIT(0),
 		.hw.init = &(struct clk_init_data) {
 			.num_parents = 1,
@@ -2348,10 +2348,10 @@ static struct clk_branch gcc_camss_csi1_ahb_clk = {
 };
 
 static struct clk_branch gcc_camss_csi2_ahb_clk = {
-	.halt_reg = 0x3C040,
+	.halt_reg = 0x3c040,
 	.halt_check = BRANCH_HALT,
 	.clkr = {
-		.enable_reg = 0x3C040,
+		.enable_reg = 0x3c040,
 		.enable_mask = BIT(0),
 		.hw.init = &(struct clk_init_data) {
 			.num_parents = 1,
@@ -2366,10 +2366,10 @@ static struct clk_branch gcc_camss_csi2_ahb_clk = {
 };
 
 static struct clk_branch gcc_camss_csi0_clk = {
-	.halt_reg = 0x4E03C,
+	.halt_reg = 0x4e03c,
 	.halt_check = BRANCH_HALT,
 	.clkr = {
-		.enable_reg = 0x4E03C,
+		.enable_reg = 0x4e03c,
 		.enable_mask = BIT(0),
 		.hw.init = &(struct clk_init_data) {
 			.num_parents = 1,
@@ -2384,10 +2384,10 @@ static struct clk_branch gcc_camss_csi0_clk = {
 };
 
 static struct clk_branch gcc_camss_csi1_clk = {
-	.halt_reg = 0x4F03C,
+	.halt_reg = 0x4f03c,
 	.halt_check = BRANCH_HALT,
 	.clkr = {
-		.enable_reg = 0x4F03C,
+		.enable_reg = 0x4f03c,
 		.enable_mask = BIT(0),
 		.hw.init = &(struct clk_init_data) {
 			.num_parents = 1,
@@ -2402,10 +2402,10 @@ static struct clk_branch gcc_camss_csi1_clk = {
 };
 
 static struct clk_branch gcc_camss_csi2_clk = {
-	.halt_reg = 0x3C03C,
+	.halt_reg = 0x3c03c,
 	.halt_check = BRANCH_HALT,
 	.clkr = {
-		.enable_reg = 0x3C03C,
+		.enable_reg = 0x3c03c,
 		.enable_mask = BIT(0),
 		.hw.init = &(struct clk_init_data) {
 			.num_parents = 1,
@@ -2438,10 +2438,10 @@ static struct clk_branch gcc_camss_csi0_csiphy_3p_clk = {
 };
 
 static struct clk_branch gcc_camss_csi1_csiphy_3p_clk = {
-	.halt_reg = 0x580A0,
+	.halt_reg = 0x580a0,
 	.halt_check = BRANCH_HALT,
 	.clkr = {
-		.enable_reg = 0x580A0,
+		.enable_reg = 0x580a0,
 		.enable_mask = BIT(0),
 		.hw.init = &(struct clk_init_data) {
 			.num_parents = 1,
@@ -2456,10 +2456,10 @@ static struct clk_branch gcc_camss_csi1_csiphy_3p_clk = {
 };
 
 static struct clk_branch gcc_camss_csi2_csiphy_3p_clk = {
-	.halt_reg = 0x580B0,
+	.halt_reg = 0x580b0,
 	.halt_check = BRANCH_HALT,
 	.clkr = {
-		.enable_reg = 0x580B0,
+		.enable_reg = 0x580b0,
 		.enable_mask = BIT(0),
 		.hw.init = &(struct clk_init_data) {
 			.num_parents = 1,
@@ -2474,10 +2474,10 @@ static struct clk_branch gcc_camss_csi2_csiphy_3p_clk = {
 };
 
 static struct clk_branch gcc_camss_csi0phy_clk = {
-	.halt_reg = 0x4E048,
+	.halt_reg = 0x4e048,
 	.halt_check = BRANCH_HALT,
 	.clkr = {
-		.enable_reg = 0x4E048,
+		.enable_reg = 0x4e048,
 		.enable_mask = BIT(0),
 		.hw.init = &(struct clk_init_data) {
 			.num_parents = 1,
@@ -2492,10 +2492,10 @@ static struct clk_branch gcc_camss_csi0phy_clk = {
 };
 
 static struct clk_branch gcc_camss_csi1phy_clk = {
-	.halt_reg = 0x4F048,
+	.halt_reg = 0x4f048,
 	.halt_check = BRANCH_HALT,
 	.clkr = {
-		.enable_reg = 0x4F048,
+		.enable_reg = 0x4f048,
 		.enable_mask = BIT(0),
 		.hw.init = &(struct clk_init_data) {
 			.num_parents = 1,
@@ -2510,10 +2510,10 @@ static struct clk_branch gcc_camss_csi1phy_clk = {
 };
 
 static struct clk_branch gcc_camss_csi2phy_clk = {
-	.halt_reg = 0x3C048,
+	.halt_reg = 0x3c048,
 	.halt_check = BRANCH_HALT,
 	.clkr = {
-		.enable_reg = 0x3C048,
+		.enable_reg = 0x3c048,
 		.enable_mask = BIT(0),
 		.hw.init = &(struct clk_init_data) {
 			.num_parents = 1,
@@ -2528,10 +2528,10 @@ static struct clk_branch gcc_camss_csi2phy_clk = {
 };
 
 static struct clk_branch gcc_camss_csi0phytimer_clk = {
-	.halt_reg = 0x4E01C,
+	.halt_reg = 0x4e01c,
 	.halt_check = BRANCH_HALT,
 	.clkr = {
-		.enable_reg = 0x4E01C,
+		.enable_reg = 0x4e01c,
 		.enable_mask = BIT(0),
 		.hw.init = &(struct clk_init_data) {
 			.num_parents = 1,
@@ -2546,10 +2546,10 @@ static struct clk_branch gcc_camss_csi0phytimer_clk = {
 };
 
 static struct clk_branch gcc_camss_csi1phytimer_clk = {
-	.halt_reg = 0x4F01C,
+	.halt_reg = 0x4f01c,
 	.halt_check = BRANCH_HALT,
 	.clkr = {
-		.enable_reg = 0x4F01C,
+		.enable_reg = 0x4f01c,
 		.enable_mask = BIT(0),
 		.hw.init = &(struct clk_init_data) {
 			.num_parents = 1,
@@ -2564,10 +2564,10 @@ static struct clk_branch gcc_camss_csi1phytimer_clk = {
 };
 
 static struct clk_branch gcc_camss_csi2phytimer_clk = {
-	.halt_reg = 0x4F068,
+	.halt_reg = 0x4f068,
 	.halt_check = BRANCH_HALT,
 	.clkr = {
-		.enable_reg = 0x4F068,
+		.enable_reg = 0x4f068,
 		.enable_mask = BIT(0),
 		.hw.init = &(struct clk_init_data) {
 			.num_parents = 1,
@@ -2582,10 +2582,10 @@ static struct clk_branch gcc_camss_csi2phytimer_clk = {
 };
 
 static struct clk_branch gcc_camss_csi0pix_clk = {
-	.halt_reg = 0x4E058,
+	.halt_reg = 0x4e058,
 	.halt_check = BRANCH_HALT,
 	.clkr = {
-		.enable_reg = 0x4E058,
+		.enable_reg = 0x4e058,
 		.enable_mask = BIT(0),
 		.hw.init = &(struct clk_init_data) {
 			.num_parents = 1,
@@ -2600,10 +2600,10 @@ static struct clk_branch gcc_camss_csi0pix_clk = {
 };
 
 static struct clk_branch gcc_camss_csi1pix_clk = {
-	.halt_reg = 0x4F058,
+	.halt_reg = 0x4f058,
 	.halt_check = BRANCH_HALT,
 	.clkr = {
-		.enable_reg = 0x4F058,
+		.enable_reg = 0x4f058,
 		.enable_mask = BIT(0),
 		.hw.init = &(struct clk_init_data) {
 			.num_parents = 1,
@@ -2618,10 +2618,10 @@ static struct clk_branch gcc_camss_csi1pix_clk = {
 };
 
 static struct clk_branch gcc_camss_csi2pix_clk = {
-	.halt_reg = 0x3C058,
+	.halt_reg = 0x3c058,
 	.halt_check = BRANCH_HALT,
 	.clkr = {
-		.enable_reg = 0x3C058,
+		.enable_reg = 0x3c058,
 		.enable_mask = BIT(0),
 		.hw.init = &(struct clk_init_data) {
 			.num_parents = 1,
@@ -2636,10 +2636,10 @@ static struct clk_branch gcc_camss_csi2pix_clk = {
 };
 
 static struct clk_branch gcc_camss_csi0rdi_clk = {
-	.halt_reg = 0x4E050,
+	.halt_reg = 0x4e050,
 	.halt_check = BRANCH_HALT,
 	.clkr = {
-		.enable_reg = 0x4E050,
+		.enable_reg = 0x4e050,
 		.enable_mask = BIT(0),
 		.hw.init = &(struct clk_init_data) {
 			.num_parents = 1,
@@ -2654,10 +2654,10 @@ static struct clk_branch gcc_camss_csi0rdi_clk = {
 };
 
 static struct clk_branch gcc_camss_csi1rdi_clk = {
-	.halt_reg = 0x4F050,
+	.halt_reg = 0x4f050,
 	.halt_check = BRANCH_HALT,
 	.clkr = {
-		.enable_reg = 0x4F050,
+		.enable_reg = 0x4f050,
 		.enable_mask = BIT(0),
 		.hw.init = &(struct clk_init_data) {
 			.num_parents = 1,
@@ -2672,10 +2672,10 @@ static struct clk_branch gcc_camss_csi1rdi_clk = {
 };
 
 static struct clk_branch gcc_camss_csi2rdi_clk = {
-	.halt_reg = 0x3C050,
+	.halt_reg = 0x3c050,
 	.halt_check = BRANCH_HALT,
 	.clkr = {
-		.enable_reg = 0x3C050,
+		.enable_reg = 0x3c050,
 		.enable_mask = BIT(0),
 		.hw.init = &(struct clk_init_data) {
 			.num_parents = 1,
@@ -2865,10 +2865,10 @@ static struct clk_branch gcc_camss_mclk1_clk = {
 };
 
 static struct clk_branch gcc_camss_mclk2_clk = {
-	.halt_reg = 0x5C018,
+	.halt_reg = 0x5c018,
 	.halt_check = BRANCH_HALT,
 	.clkr = {
-		.enable_reg = 0x5C018,
+		.enable_reg = 0x5c018,
 		.enable_mask = BIT(0),
 		.hw.init = &(struct clk_init_data) {
 			.num_parents = 1,
@@ -2883,10 +2883,10 @@ static struct clk_branch gcc_camss_mclk2_clk = {
 };
 
 static struct clk_branch gcc_camss_mclk3_clk = {
-	.halt_reg = 0x5E018,
+	.halt_reg = 0x5e018,
 	.halt_check = BRANCH_HALT,
 	.clkr = {
-		.enable_reg = 0x5E018,
+		.enable_reg = 0x5e018,
 		.enable_mask = BIT(0),
 		.hw.init = &(struct clk_init_data) {
 			.num_parents = 1,
@@ -2901,10 +2901,10 @@ static struct clk_branch gcc_camss_mclk3_clk = {
 };
 
 static struct clk_branch gcc_camss_micro_ahb_clk = {
-	.halt_reg = 0x5600C,
+	.halt_reg = 0x5600c,
 	.halt_check = BRANCH_HALT,
 	.clkr = {
-		.enable_reg = 0x5600C,
+		.enable_reg = 0x5600c,
 		.enable_mask = BIT(0),
 		.hw.init = &(struct clk_init_data) {
 			.num_parents = 1,
@@ -2919,10 +2919,10 @@ static struct clk_branch gcc_camss_micro_ahb_clk = {
 };
 
 static struct clk_branch gcc_camss_top_ahb_clk = {
-	.halt_reg = 0x5A014,
+	.halt_reg = 0x5a014,
 	.halt_check = BRANCH_HALT,
 	.clkr = {
-		.enable_reg = 0x5A014,
+		.enable_reg = 0x5a014,
 		.enable_mask = BIT(0),
 		.hw.init = &(struct clk_init_data) {
 			.num_parents = 1,
@@ -3017,10 +3017,10 @@ static struct clk_branch gcc_camss_vfe1_axi_clk = {
 };
 
 static struct clk_branch gcc_camss_vfe1_clk = {
-	.halt_reg = 0x5805C,
+	.halt_reg = 0x5805c,
 	.halt_check = BRANCH_HALT,
 	.clkr = {
-		.enable_reg = 0x5805C,
+		.enable_reg = 0x5805c,
 		.enable_mask = BIT(0),
 		.hw.init = &(struct clk_init_data) {
 			.num_parents = 1,
@@ -3038,7 +3038,7 @@ static struct clk_branch gcc_cpp_tbu_clk = {
 	.halt_reg = 0x12040,
 	.halt_check = BRANCH_HALT_VOTED,
 	.clkr = {
-		.enable_reg = 0x4500C,
+		.enable_reg = 0x4500c,
 		.enable_mask = BIT(14),
 		.hw.init = &(struct clk_init_data) {
 			.name = "gcc_cpp_tbu_clk",
@@ -3074,7 +3074,7 @@ static struct clk_branch gcc_crypto_axi_clk = {
 };
 
 static struct clk_branch gcc_crypto_clk = {
-	.halt_reg = 0x1601C,
+	.halt_reg = 0x1601c,
 	.halt_check = BRANCH_HALT_VOTED,
 	.clkr = {
 		.enable_reg = 0x45004,
@@ -3141,10 +3141,10 @@ static struct clk_branch gcc_gp2_clk = {
 };
 
 static struct clk_branch gcc_gp3_clk = {
-	.halt_reg = 0x0A000,
+	.halt_reg = 0x0a000,
 	.halt_check = BRANCH_HALT,
 	.clkr = {
-		.enable_reg = 0x0A000,
+		.enable_reg = 0x0a000,
 		.enable_mask = BIT(0),
 		.hw.init = &(struct clk_init_data) {
 			.num_parents = 1,
@@ -3162,7 +3162,7 @@ static struct clk_branch gcc_jpeg_tbu_clk = {
 	.halt_reg = 0x12034,
 	.halt_check = BRANCH_HALT_VOTED,
 	.clkr = {
-		.enable_reg = 0x4500C,
+		.enable_reg = 0x4500c,
 		.enable_mask = BIT(10),
 		.hw.init = &(struct clk_init_data) {
 			.name = "gcc_jpeg_tbu_clk",
@@ -3172,10 +3172,10 @@ static struct clk_branch gcc_jpeg_tbu_clk = {
 };
 
 static struct clk_branch gcc_mdp_tbu_clk = {
-	.halt_reg = 0x1201C,
+	.halt_reg = 0x1201c,
 	.halt_check = BRANCH_HALT_VOTED,
 	.clkr = {
-		.enable_reg = 0x4500C,
+		.enable_reg = 0x4500c,
 		.enable_mask = BIT(4),
 		.hw.init = &(struct clk_init_data) {
 			.name = "gcc_mdp_tbu_clk",
@@ -3185,10 +3185,10 @@ static struct clk_branch gcc_mdp_tbu_clk = {
 };
 
 static struct clk_branch gcc_mdss_ahb_clk = {
-	.halt_reg = 0x4D07C,
+	.halt_reg = 0x4d07c,
 	.halt_check = BRANCH_HALT,
 	.clkr = {
-		.enable_reg = 0x4D07C,
+		.enable_reg = 0x4d07c,
 		.enable_mask = BIT(0),
 		.hw.init = &(struct clk_init_data) {
 			.name = "gcc_mdss_ahb_clk",
@@ -3198,10 +3198,10 @@ static struct clk_branch gcc_mdss_ahb_clk = {
 };
 
 static struct clk_branch gcc_mdss_axi_clk = {
-	.halt_reg = 0x4D080,
+	.halt_reg = 0x4d080,
 	.halt_check = BRANCH_HALT,
 	.clkr = {
-		.enable_reg = 0x4D080,
+		.enable_reg = 0x4d080,
 		.enable_mask = BIT(0),
 		.hw.init = &(struct clk_init_data) {
 			.name = "gcc_mdss_axi_clk",
@@ -3211,10 +3211,10 @@ static struct clk_branch gcc_mdss_axi_clk = {
 };
 
 static struct clk_branch gcc_mdss_byte0_clk = {
-	.halt_reg = 0x4D094,
+	.halt_reg = 0x4d094,
 	.halt_check = BRANCH_HALT,
 	.clkr = {
-		.enable_reg = 0x4D094,
+		.enable_reg = 0x4d094,
 		.enable_mask = BIT(0),
 		.hw.init = &(struct clk_init_data) {
 			.num_parents = 1,
@@ -3229,10 +3229,10 @@ static struct clk_branch gcc_mdss_byte0_clk = {
 };
 
 static struct clk_branch gcc_mdss_byte1_clk = {
-	.halt_reg = 0x4D0A0,
+	.halt_reg = 0x4d0a0,
 	.halt_check = BRANCH_HALT,
 	.clkr = {
-		.enable_reg = 0x4D0A0,
+		.enable_reg = 0x4d0a0,
 		.enable_mask = BIT(0),
 		.hw.init = &(struct clk_init_data) {
 			.num_parents = 1,
@@ -3247,10 +3247,10 @@ static struct clk_branch gcc_mdss_byte1_clk = {
 };
 
 static struct clk_branch gcc_mdss_esc0_clk = {
-	.halt_reg = 0x4D098,
+	.halt_reg = 0x4d098,
 	.halt_check = BRANCH_HALT,
 	.clkr = {
-		.enable_reg = 0x4D098,
+		.enable_reg = 0x4d098,
 		.enable_mask = BIT(0),
 		.hw.init = &(struct clk_init_data) {
 			.num_parents = 1,
@@ -3265,10 +3265,10 @@ static struct clk_branch gcc_mdss_esc0_clk = {
 };
 
 static struct clk_branch gcc_mdss_esc1_clk = {
-	.halt_reg = 0x4D09C,
+	.halt_reg = 0x4d09c,
 	.halt_check = BRANCH_HALT,
 	.clkr = {
-		.enable_reg = 0x4D09C,
+		.enable_reg = 0x4d09c,
 		.enable_mask = BIT(0),
 		.hw.init = &(struct clk_init_data) {
 			.num_parents = 1,
@@ -3283,10 +3283,10 @@ static struct clk_branch gcc_mdss_esc1_clk = {
 };
 
 static struct clk_branch gcc_mdss_mdp_clk = {
-	.halt_reg = 0x4D088,
+	.halt_reg = 0x4d088,
 	.halt_check = BRANCH_HALT,
 	.clkr = {
-		.enable_reg = 0x4D088,
+		.enable_reg = 0x4d088,
 		.enable_mask = BIT(0),
 		.hw.init = &(struct clk_init_data) {
 			.num_parents = 1,
@@ -3301,10 +3301,10 @@ static struct clk_branch gcc_mdss_mdp_clk = {
 };
 
 static struct clk_branch gcc_mdss_pclk0_clk = {
-	.halt_reg = 0x4D084,
+	.halt_reg = 0x4d084,
 	.halt_check = BRANCH_HALT,
 	.clkr = {
-		.enable_reg = 0x4D084,
+		.enable_reg = 0x4d084,
 		.enable_mask = BIT(0),
 		.hw.init = &(struct clk_init_data) {
 			.num_parents = 1,
@@ -3319,10 +3319,10 @@ static struct clk_branch gcc_mdss_pclk0_clk = {
 };
 
 static struct clk_branch gcc_mdss_pclk1_clk = {
-	.halt_reg = 0x4D0A4,
+	.halt_reg = 0x4d0a4,
 	.halt_check = BRANCH_HALT,
 	.clkr = {
-		.enable_reg = 0x4D0A4,
+		.enable_reg = 0x4d0a4,
 		.enable_mask = BIT(0),
 		.hw.init = &(struct clk_init_data) {
 			.num_parents = 1,
@@ -3337,10 +3337,10 @@ static struct clk_branch gcc_mdss_pclk1_clk = {
 };
 
 static struct clk_branch gcc_mdss_vsync_clk = {
-	.halt_reg = 0x4D090,
+	.halt_reg = 0x4d090,
 	.halt_check = BRANCH_HALT,
 	.clkr = {
-		.enable_reg = 0x4D090,
+		.enable_reg = 0x4d090,
 		.enable_mask = BIT(0),
 		.hw.init = &(struct clk_init_data) {
 			.num_parents = 1,
@@ -3442,10 +3442,10 @@ static struct clk_branch gcc_oxili_timer_clk = {
 };
 
 static struct clk_branch gcc_pcnoc_usb3_axi_clk = {
-	.halt_reg = 0x3F038,
+	.halt_reg = 0x3f038,
 	.halt_check = BRANCH_HALT,
 	.clkr = {
-		.enable_reg = 0x3F038,
+		.enable_reg = 0x3f038,
 		.enable_mask = BIT(0),
 		.hw.init = &(struct clk_init_data) {
 			.num_parents = 1,
@@ -3460,10 +3460,10 @@ static struct clk_branch gcc_pcnoc_usb3_axi_clk = {
 };
 
 static struct clk_branch gcc_pdm2_clk = {
-	.halt_reg = 0x4400C,
+	.halt_reg = 0x4400c,
 	.halt_check = BRANCH_HALT,
 	.clkr = {
-		.enable_reg = 0x4400C,
+		.enable_reg = 0x4400c,
 		.enable_mask = BIT(0),
 		.hw.init = &(struct clk_init_data) {
 			.num_parents = 1,
@@ -3530,10 +3530,10 @@ static struct clk_branch gcc_qusb_ref_clk = {
 };
 
 static struct clk_branch gcc_rbcpr_gfx_clk = {
-	.halt_reg = 0x3A004,
+	.halt_reg = 0x3a004,
 	.halt_check = BRANCH_HALT,
 	.clkr = {
-		.enable_reg = 0x3A004,
+		.enable_reg = 0x3a004,
 		.enable_mask = BIT(0),
 		.hw.init = &(struct clk_init_data) {
 			.num_parents = 1,
@@ -3548,10 +3548,10 @@ static struct clk_branch gcc_rbcpr_gfx_clk = {
 };
 
 static struct clk_branch gcc_sdcc1_ice_core_clk = {
-	.halt_reg = 0x5D014,
+	.halt_reg = 0x5d014,
 	.halt_check = BRANCH_HALT,
 	.clkr = {
-		.enable_reg = 0x5D014,
+		.enable_reg = 0x5d014,
 		.enable_mask = BIT(0),
 		.hw.init = &(struct clk_init_data) {
 			.num_parents = 1,
@@ -3566,10 +3566,10 @@ static struct clk_branch gcc_sdcc1_ice_core_clk = {
 };
 
 static struct clk_branch gcc_sdcc1_ahb_clk = {
-	.halt_reg = 0x4201C,
+	.halt_reg = 0x4201c,
 	.halt_check = BRANCH_HALT,
 	.clkr = {
-		.enable_reg = 0x4201C,
+		.enable_reg = 0x4201c,
 		.enable_mask = BIT(0),
 		.hw.init = &(struct clk_init_data) {
 			.name = "gcc_sdcc1_ahb_clk",
@@ -3579,10 +3579,10 @@ static struct clk_branch gcc_sdcc1_ahb_clk = {
 };
 
 static struct clk_branch gcc_sdcc2_ahb_clk = {
-	.halt_reg = 0x4301C,
+	.halt_reg = 0x4301c,
 	.halt_check = BRANCH_HALT,
 	.clkr = {
-		.enable_reg = 0x4301C,
+		.enable_reg = 0x4301c,
 		.enable_mask = BIT(0),
 		.hw.init = &(struct clk_init_data) {
 			.name = "gcc_sdcc2_ahb_clk",
@@ -3631,7 +3631,7 @@ static struct clk_branch gcc_smmu_cfg_clk = {
 	.halt_reg = 0x12038,
 	.halt_check = BRANCH_HALT_VOTED,
 	.clkr = {
-		.enable_reg = 0x4500C,
+		.enable_reg = 0x4500c,
 		.enable_mask = BIT(12),
 		.hw.init = &(struct clk_init_data) {
 			.name = "gcc_smmu_cfg_clk",
@@ -3641,10 +3641,10 @@ static struct clk_branch gcc_smmu_cfg_clk = {
 };
 
 static struct clk_branch gcc_usb30_master_clk = {
-	.halt_reg = 0x3F000,
+	.halt_reg = 0x3f000,
 	.halt_check = BRANCH_HALT,
 	.clkr = {
-		.enable_reg = 0x3F000,
+		.enable_reg = 0x3f000,
 		.enable_mask = BIT(0),
 		.hw.init = &(struct clk_init_data) {
 			.num_parents = 1,
@@ -3659,10 +3659,10 @@ static struct clk_branch gcc_usb30_master_clk = {
 };
 
 static struct clk_branch gcc_usb30_mock_utmi_clk = {
-	.halt_reg = 0x3F008,
+	.halt_reg = 0x3f008,
 	.halt_check = BRANCH_HALT,
 	.clkr = {
-		.enable_reg = 0x3F008,
+		.enable_reg = 0x3f008,
 		.enable_mask = BIT(0),
 		.hw.init = &(struct clk_init_data) {
 			.num_parents = 1,
@@ -3677,10 +3677,10 @@ static struct clk_branch gcc_usb30_mock_utmi_clk = {
 };
 
 static struct clk_branch gcc_usb30_sleep_clk = {
-	.halt_reg = 0x3F004,
+	.halt_reg = 0x3f004,
 	.halt_check = BRANCH_HALT,
 	.clkr = {
-		.enable_reg = 0x3F004,
+		.enable_reg = 0x3f004,
 		.enable_mask = BIT(0),
 		.hw.init = &(struct clk_init_data) {
 			.name = "gcc_usb30_sleep_clk",
@@ -3690,10 +3690,10 @@ static struct clk_branch gcc_usb30_sleep_clk = {
 };
 
 static struct clk_branch gcc_usb3_aux_clk = {
-	.halt_reg = 0x3F044,
+	.halt_reg = 0x3f044,
 	.halt_check = BRANCH_HALT,
 	.clkr = {
-		.enable_reg = 0x3F044,
+		.enable_reg = 0x3f044,
 		.enable_mask = BIT(0),
 		.hw.init = &(struct clk_init_data) {
 			.num_parents = 1,
@@ -3711,7 +3711,7 @@ static struct clk_branch gcc_usb3_pipe_clk = {
 	.halt_reg = 0,
 	.halt_check = BRANCH_HALT_DELAY,
 	.clkr = {
-		.enable_reg = 0x3F040,
+		.enable_reg = 0x3f040,
 		.enable_mask = BIT(0),
 		.hw.init = &(struct clk_init_data) {
 			.name = "gcc_usb3_pipe_clk",
@@ -3721,10 +3721,10 @@ static struct clk_branch gcc_usb3_pipe_clk = {
 };
 
 static struct clk_branch gcc_usb_phy_cfg_ahb_clk = {
-	.halt_reg = 0x3F080,
+	.halt_reg = 0x3f080,
 	.halt_check = BRANCH_VOTED,
 	.clkr = {
-		.enable_reg = 0x3F080,
+		.enable_reg = 0x3f080,
 		.enable_mask = BIT(0),
 		.hw.init = &(struct clk_init_data) {
 			.name = "gcc_usb_phy_cfg_ahb_clk",
@@ -3737,7 +3737,7 @@ static struct clk_branch gcc_usb_ss_ref_clk = {
 	.halt_reg = 0,
 	.halt_check = BRANCH_HALT_SKIP,
 	.clkr = {
-		.enable_reg = 0x3F07C,
+		.enable_reg = 0x3f07c,
 		.enable_mask = BIT(0),
 		.hw.init = &(struct clk_init_data) {
 			.name = "gcc_usb_ss_ref_clk",
@@ -3747,10 +3747,10 @@ static struct clk_branch gcc_usb_ss_ref_clk = {
 };
 
 static struct clk_branch gcc_venus0_ahb_clk = {
-	.halt_reg = 0x4C020,
+	.halt_reg = 0x4c020,
 	.halt_check = BRANCH_HALT,
 	.clkr = {
-		.enable_reg = 0x4C020,
+		.enable_reg = 0x4c020,
 		.enable_mask = BIT(0),
 		.hw.init = &(struct clk_init_data) {
 			.name = "gcc_venus0_ahb_clk",
@@ -3760,10 +3760,10 @@ static struct clk_branch gcc_venus0_ahb_clk = {
 };
 
 static struct clk_branch gcc_venus0_axi_clk = {
-	.halt_reg = 0x4C024,
+	.halt_reg = 0x4c024,
 	.halt_check = BRANCH_HALT,
 	.clkr = {
-		.enable_reg = 0x4C024,
+		.enable_reg = 0x4c024,
 		.enable_mask = BIT(0),
 		.hw.init = &(struct clk_init_data) {
 			.name = "gcc_venus0_axi_clk",
@@ -3773,10 +3773,10 @@ static struct clk_branch gcc_venus0_axi_clk = {
 };
 
 static struct clk_branch gcc_venus0_core0_vcodec0_clk = {
-	.halt_reg = 0x4C02C,
+	.halt_reg = 0x4c02c,
 	.halt_check = BRANCH_HALT,
 	.clkr = {
-		.enable_reg = 0x4C02C,
+		.enable_reg = 0x4c02c,
 		.enable_mask = BIT(0),
 		.hw.init = &(struct clk_init_data) {
 			.num_parents = 1,
@@ -3791,10 +3791,10 @@ static struct clk_branch gcc_venus0_core0_vcodec0_clk = {
 };
 
 static struct clk_branch gcc_venus0_vcodec0_clk = {
-	.halt_reg = 0x4C01C,
+	.halt_reg = 0x4c01c,
 	.halt_check = BRANCH_HALT,
 	.clkr = {
-		.enable_reg = 0x4C01C,
+		.enable_reg = 0x4c01c,
 		.enable_mask = BIT(0),
 		.hw.init = &(struct clk_init_data) {
 			.num_parents = 1,
@@ -3812,7 +3812,7 @@ static struct clk_branch gcc_venus_tbu_clk = {
 	.halt_reg = 0x12014,
 	.halt_check = BRANCH_HALT_VOTED,
 	.clkr = {
-		.enable_reg = 0x4500C,
+		.enable_reg = 0x4500c,
 		.enable_mask = BIT(5),
 		.hw.init = &(struct clk_init_data) {
 			.name = "gcc_venus_tbu_clk",
@@ -3825,7 +3825,7 @@ static struct clk_branch gcc_vfe1_tbu_clk = {
 	.halt_reg = 0x12090,
 	.halt_check = BRANCH_HALT_VOTED,
 	.clkr = {
-		.enable_reg = 0x4500C,
+		.enable_reg = 0x4500c,
 		.enable_mask = BIT(17),
 		.hw.init = &(struct clk_init_data) {
 			.name = "gcc_vfe1_tbu_clk",
@@ -3835,10 +3835,10 @@ static struct clk_branch gcc_vfe1_tbu_clk = {
 };
 
 static struct clk_branch gcc_vfe_tbu_clk = {
-	.halt_reg = 0x1203C,
+	.halt_reg = 0x1203c,
 	.halt_check = BRANCH_HALT_VOTED,
 	.clkr = {
-		.enable_reg = 0x4500C,
+		.enable_reg = 0x4500c,
 		.enable_mask = BIT(9),
 		.hw.init = &(struct clk_init_data) {
 			.name = "gcc_vfe_tbu_clk",
