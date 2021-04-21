@@ -12,7 +12,7 @@
 		{ .compatible = _compatible, &_prefix##_info },		\
 		{ }							\
 	};								\
-	MODULE_DEVICE_TABLE(of, tianma_622_v0_of_match);		\
+	MODULE_DEVICE_TABLE(of, _prefix##_of_match);			\
 	static struct mipi_dsi_driver _prefix##_driver = {		\
 		.probe = panel_mipi_dsi_common_probe,			\
 		.remove = panel_mipi_dsi_common_remove,			\
