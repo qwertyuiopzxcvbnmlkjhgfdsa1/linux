@@ -95,7 +95,7 @@ static const struct panel_mipi_dsi_info hx8399c_fhdplus_info = {
 		    | MIPI_DSI_MODE_LPM
 };
 
-MIPI_DSI_PANEL_DRIVER(hx8399c_fhdplus, "himax-hx8399c_fhdplus", "himax,hx8399c_fhdplus");
+MIPI_DSI_PANEL_DRIVER(hx8399c_fhdplus, "himax-hx8399c_fhdplus", "himax,hx8399c-fhdplus");
 
 MODULE_AUTHOR("linux-mdss-dsi-panel-driver-generator <fix@me>"); // FIXME
 MODULE_DESCRIPTION("DRM driver for hx8399c fhdplus video mode dsi panel");
