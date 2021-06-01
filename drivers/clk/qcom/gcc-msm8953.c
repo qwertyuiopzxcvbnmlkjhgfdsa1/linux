@@ -2155,7 +2155,7 @@ static struct clk_branch gcc_blsp1_uart2_apps_clk = {
 		.hw.init = &(struct clk_init_data) {
 			.num_parents = 1,
 			.parent_data = &(const struct clk_parent_data) {
-				.hw = &blsp2_uart2_apps_clk_src.clkr.hw,
+				.hw = &blsp1_uart2_apps_clk_src.clkr.hw,
 			},
 			.name = "gcc_blsp1_uart2_apps_clk",
 			.ops = &clk_branch2_ops,
@@ -2173,7 +2173,7 @@ static struct clk_branch gcc_blsp2_uart1_apps_clk = {
 		.hw.init = &(struct clk_init_data) {
 			.num_parents = 1,
 			.parent_data = &(const struct clk_parent_data) {
-				.hw = &blsp1_uart1_apps_clk_src.clkr.hw,
+				.hw = &blsp2_uart1_apps_clk_src.clkr.hw,
 			},
 			.name = "gcc_blsp2_uart1_apps_clk",
 			.ops = &clk_branch2_ops,
