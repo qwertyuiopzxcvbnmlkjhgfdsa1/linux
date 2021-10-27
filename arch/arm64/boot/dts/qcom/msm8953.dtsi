@@ -1167,8 +1167,7 @@
 						<&bimc MAS_APPS_PROC &pcnoc SLV_DISP_SS_CFG>;
 				interconnect-names = "mdp0-mem", "cpu-cfg";
 
-				iommus = <&apps_iommu 0x15>;
-				iommu-defer-attach;
+				iommus = <&apps_iommu 0xc00 0>;
 
 				ports {
 					#address-cells = <1>;
@@ -1299,7 +1298,8 @@
 				      "csi_vfe1",
 				      "vfe1_ahb",
 				      "vfe1_axi";
-			iommus = <&apps_iommu 0x14>;
+			iommus = <&apps_iommu 0x400 0x0>,
+				 <&apps_iommu 0x2800 0x0>;
 
 			interconnects = <&sysmmnoc MAS_VFE0 &bimc SLV_EBI>,
 					<&sysmmnoc MAS_VFE1 &bimc SLV_EBI>,
@@ -1384,7 +1384,7 @@
 			interconnects = <&bimc MAS_OXILI &bimc SLV_EBI>,
 					<&bimc MAS_APPS_PROC &pcnoc SLV_GPU_CFG>; // Downstream doesn't handlde this,
 										  // so values are made up.
-			iommus = <&gpu_iommu 0>;
+			iommus = <&gpu_iommu 0 1>;
 
 			operating-points-v2 = <&gpu_opp_table>;
 
@@ -1417,31 +1417,24 @@
 		};
 
 		gpu_iommu: iommu@1c40000 {
-			#address-cells = <1>;
-			#size-cells = <1>;
-			#iommu-cells = <1>;
-			compatible = "qcom,msm8953-gpu-iommu", "qcom,msm-iommu-v1";
-			ranges = <0 0x01c48000 0x8000>;
+			compatible = "qcom,msm8953-smmu-v2", "qcom,adreno-smmu", "qcom,smmu-v2";
+			reg = <0x01c40000 0x10000>;
+
 			clocks = <&gcc GCC_OXILI_AHB_CLK>,
 				 <&gcc GCC_BIMC_GFX_CLK>;
 			clock-names = "iface", "bus";
-			qcom,iommu-secure-id = <18>;
+
+			#global-interrupts = <0>;
+			interrupts = <GIC_SPI 225 IRQ_TYPE_LEVEL_HIGH>,
+				     <GIC_SPI 232 IRQ_TYPE_LEVEL_HIGH>,
+				     <GIC_SPI 233 IRQ_TYPE_LEVEL_HIGH>,
+				     <GIC_SPI 234 IRQ_TYPE_LEVEL_HIGH>;
 
 			power-domains = <&gcc OXILI_CX_GDSC>;
 
-			// gfx3d_user:
-			iommu-ctx@0000 {
-				compatible = "qcom,msm-iommu-v1-ns";
-				reg = <0x0000 0x1000>;
-				interrupts = <GIC_SPI 225 IRQ_TYPE_LEVEL_HIGH>;
-			};
+			qcom,iommu-secure-id = <18>;
 
-			// gfx3d_priv:
-			iommu-ctx@2000 {
-				compatible = "qcom,msm-iommu-v1-sec";
-				reg = <0x2000 0x1000>;
-				interrupts = <GIC_SPI 233 IRQ_TYPE_LEVEL_HIGH>;
-			};
+			#iommu-cells = <2>;
 		};
 
 		venus@1d00000 {
@@ -1466,7 +1459,13 @@
 					<&bimc MAS_APPS_PROC &pcnoc SLV_VENUS_CFG>;
 			interconnect-names = "video-mem", "cpu-cfg";
 
-			iommus = <&apps_iommu 0x16>;
+			iommus = <&apps_iommu 0x800 0x1>,
+				 <&apps_iommu 0x807 0x0>,
+				 <&apps_iommu 0x808 0x7>,
+				 <&apps_iommu 0x810 0x1>,
+				 <&apps_iommu 0x828 0x1>,
+				 <&apps_iommu 0x82c 0x1>,
+				 <&apps_iommu 0x821 0x10>;
 
 			memory-region = <&venus_mem>;
 
@@ -1521,36 +1520,50 @@
 		};
 
 		apps_iommu: iommu@1e00000 {
-			#address-cells = <1>;
-			#size-cells = <1>;
-			#iommu-cells = <1>;
-			compatible = "qcom,msm8953-iommu", "qcom,msm-iommu-v1";
-			#global-interrupts = <0>;
-			ranges  = <0 0x1e20000 0x20000>;
+			compatible = "qcom,msm8953-smmu-500", "qcom,smmu-v2";
+			reg = <0x1e00000 0x40000>;
+
 			clocks = <&gcc GCC_SMMU_CFG_CLK>,
 				 <&gcc GCC_APSS_TCU_ASYNC_CLK>;
 			clock-names = "iface", "bus";
 
+			#global-interrupts = <0>;
+			interrupts = <GIC_SPI 253 IRQ_TYPE_LEVEL_HIGH>,
+				     <GIC_SPI 254 IRQ_TYPE_LEVEL_HIGH>,
+				     <GIC_SPI 255 IRQ_TYPE_LEVEL_HIGH>,
+				     <GIC_SPI 53 IRQ_TYPE_LEVEL_HIGH>,
+				     <GIC_SPI 54 IRQ_TYPE_LEVEL_HIGH>,
+				     <GIC_SPI 58 IRQ_TYPE_LEVEL_HIGH>,
+				     <GIC_SPI 60 IRQ_TYPE_LEVEL_HIGH>,
+				     <GIC_SPI 61 IRQ_TYPE_LEVEL_HIGH>,
+				     <GIC_SPI 76 IRQ_TYPE_LEVEL_HIGH>,
+				     <GIC_SPI 77 IRQ_TYPE_LEVEL_HIGH>,
+				     <GIC_SPI 80 IRQ_TYPE_LEVEL_HIGH>,
+				     <GIC_SPI 94 IRQ_TYPE_LEVEL_HIGH>,
+				     <GIC_SPI 101 IRQ_TYPE_LEVEL_HIGH>,
+				     <GIC_SPI 102 IRQ_TYPE_LEVEL_HIGH>,
+				     <GIC_SPI 103 IRQ_TYPE_LEVEL_HIGH>,
+				     <GIC_SPI 104 IRQ_TYPE_LEVEL_HIGH>,
+				     <GIC_SPI 105 IRQ_TYPE_LEVEL_HIGH>,
+				     <GIC_SPI 106 IRQ_TYPE_LEVEL_HIGH>,
+				     <GIC_SPI 109 IRQ_TYPE_LEVEL_HIGH>,
+				     <GIC_SPI 110 IRQ_TYPE_LEVEL_HIGH>,
+				     <GIC_SPI 111 IRQ_TYPE_LEVEL_HIGH>,
+				     <GIC_SPI 112 IRQ_TYPE_LEVEL_HIGH>,
+				     <GIC_SPI 113 IRQ_TYPE_LEVEL_HIGH>,
+				     <GIC_SPI 114 IRQ_TYPE_LEVEL_HIGH>,
+				     <GIC_SPI 115 IRQ_TYPE_LEVEL_HIGH>,
+				     <GIC_SPI 116 IRQ_TYPE_LEVEL_HIGH>,
+				     <GIC_SPI 117 IRQ_TYPE_LEVEL_HIGH>,
+				     <GIC_SPI 118 IRQ_TYPE_LEVEL_HIGH>,
+				     <GIC_SPI 119 IRQ_TYPE_LEVEL_HIGH>,
+				     <GIC_SPI 120 IRQ_TYPE_LEVEL_HIGH>,
+				     <GIC_SPI 121 IRQ_TYPE_LEVEL_HIGH>,
+				     <GIC_SPI 122 IRQ_TYPE_LEVEL_HIGH>;
+
 			qcom,iommu-secure-id = <17>;
 
-			iommu-ctx@14000 { // vfe
-				compatible = "qcom,msm-iommu-v1-ns";
-				reg = <0x14000 0x1000>;
-				interrupts = <GIC_SPI 111 IRQ_TYPE_LEVEL_HIGH>;
-			};
-
-			iommu-ctx@15000 { // mdp_0
-				compatible = "qcom,msm-iommu-v1-ns";
-				reg = <0x15000 0x1000>;
-				interrupts = <GIC_SPI 112 IRQ_TYPE_LEVEL_HIGH>;
-			};
-
-			iommu-ctx@16000 { // venus_ns
-				compatible = "qcom,msm-iommu-v1-ns";
-				reg = <0x16000 0x1000>;
-				interrupts = <GIC_SPI 113 IRQ_TYPE_LEVEL_HIGH>;
-			};
-
+			#iommu-cells = <2>;
 		};
 
 		spmi_bus: spmi@200f000 {
