@@ -67,7 +67,7 @@
 
 		/delete-node/rmtfs@f2d00000;
 
-		rmtfs@0xff600000 {
+		rmtfs@ff600000 {
 			compatible = "qcom,rmtfs-mem";
 			reg = <0x0 0xff600000 0x0 0x180000>;
 			no-map;
