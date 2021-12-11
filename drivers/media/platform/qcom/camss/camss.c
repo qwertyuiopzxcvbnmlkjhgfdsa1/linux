@@ -1528,6 +1528,7 @@ static int camss_probe(struct platform_device *pdev)
 	}
 
 	if (camss->version == CAMSS_8x16 ||
+	    camss->version == CAMSS_8x53 ||
 	    camss->version == CAMSS_8x96) {
 		camss->ispif = devm_kcalloc(dev, 1, sizeof(*camss->ispif), GFP_KERNEL);
 		if (!camss->ispif) {
