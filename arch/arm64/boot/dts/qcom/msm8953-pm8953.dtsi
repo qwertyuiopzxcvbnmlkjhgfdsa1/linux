@@ -5,18 +5,16 @@
 #include "pm8953.dtsi"
 
 &hsusb_phy {
-	phy-supply = <&pm8953_l3>;
+	vdd-supply = <&pm8953_l3>;
 	vdda-pll-supply = <&pm8953_l7>;
 	vdda-phy-dpdm-supply = <&pm8953_l13>;
 };
 
 &dsi_phy0 {
-	vddio-supply = <&pm8953_l6>;
 	vcca-supply = <&pm8953_l3>;
 };
 
 &dsi0 {
-	vdd-supply = <&pm8953_l17>;
 	vdda-supply = <&pm8953_s3>;
 	vddio-supply = <&pm8953_l6>;
 };
