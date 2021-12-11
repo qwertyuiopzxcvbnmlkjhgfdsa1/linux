@@ -534,9 +534,9 @@
 			};
 		};
 
-		bimc: interconnect-bimc@400000 {
+		bimc: interconnect@400000 {
 			compatible = "qcom,msm8953-bimc";
-			reg = <0x400000 0x5A000>;
+			reg = <0x400000 0x5a000>;
 
 			clock-names = "bus", "bus_a";
 			clocks = <&rpmcc RPM_SMD_BIMC_CLK>,
@@ -561,7 +561,7 @@
 			reg = <0x4ab000 0x4>;
 		};
 
-		pcnoc: interconnect-pcnoc@500000 {
+		pcnoc: interconnect@500000 {
 			compatible = "qcom,msm8953-pcnoc";
 			reg = <0x500000 0x12080>;
 
@@ -573,7 +573,7 @@
 			#interconnect-cells = <1>;
 		};
 
-		snoc: interconnect-snoc@580000 {
+		snoc: interconnect@580000 {
 			compatible = "qcom,msm8953-snoc";
 			reg = <0x580000 0x16080>;
 
@@ -582,19 +582,17 @@
 				 <&rpmcc RPM_SMD_SNOC_A_CLK>;
 
 			#interconnect-cells = <1>;
+
+			snoc_mm: interconnect {
+				compatible = "qcom,msm8953-snoc-mm";
+
+				clock-names = "bus", "bus_a";
+				clocks = <&rpmcc RPM_SMD_SYSMMNOC_CLK>,
+					 <&rpmcc RPM_SMD_SYSMMNOC_A_CLK>;
+
+				#interconnect-cells = <1>;
+			};
 		};
-
-		sysmmnoc: interconnect-snoc-mm@580000 {
-			compatible = "qcom,msm8953-sysmmnoc";
-			reg = <0x580000 0x16080>;
-
-			clock-names = "bus", "bus_a";
-			clocks = <&rpmcc RPM_SMD_SYSMMNOC_CLK>,
-				 <&rpmcc RPM_SMD_SYSMMNOC_A_CLK>;
-
-			#interconnect-cells = <1>;
-		};
-
 
 		rng@e30000 {
 			status = "disabled";
@@ -1244,7 +1242,7 @@
 					      "core",
 					      "vsync";
 
-				interconnects = <&sysmmnoc MAS_MDP &bimc SLV_EBI>,
+				interconnects = <&snoc_mm MAS_MDP &bimc SLV_EBI>,
 						<&bimc MAS_APPS_PROC &pcnoc SLV_DISP_SS_CFG>;
 				interconnect-names = "mdp0-mem", "cpu-cfg";
 
@@ -1382,8 +1380,8 @@
 			iommus = <&apps_iommu 0x400 0x0>,
 				 <&apps_iommu 0x2800 0x0>;
 
-			interconnects = <&sysmmnoc MAS_VFE0 &bimc SLV_EBI>,
-					<&sysmmnoc MAS_VFE1 &bimc SLV_EBI>,
+			interconnects = <&snoc_mm MAS_VFE0 &bimc SLV_EBI>,
+					<&snoc_mm MAS_VFE1 &bimc SLV_EBI>,
 					<&bimc MAS_APPS_PROC &pcnoc SLV_CAMERA_SS_CFG>;
 			interconnect-names = "vfe0-mem", "vfe1-mem", "cpu-cfg";
 
@@ -1533,7 +1531,7 @@
 					<&rpmpd MSM8953_VDDCX>;
 			power-domain-names = "venus", "cx";
 
-			interconnects = <&sysmmnoc MAS_VENUS &bimc SLV_EBI>,
+			interconnects = <&snoc_mm MAS_VENUS &bimc SLV_EBI>,
 					<&bimc MAS_APPS_PROC &pcnoc SLV_VENUS_CFG>;
 			interconnect-names = "video-mem", "cpu-cfg";
 
