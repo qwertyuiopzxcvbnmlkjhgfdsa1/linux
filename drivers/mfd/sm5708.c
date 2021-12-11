@@ -160,35 +160,46 @@ static int sm5708_i2c_probe(struct i2c_client *i2c,
 		const struct i2c_device_id *dev_id)
 {
 	struct sm5708_chip *chip;
-	int ret = 0;
+	struct device *dev = &i2c->dev;
+	int ret, regval;
 
-	chip = devm_kzalloc(&i2c->dev, sizeof(struct sm5708_chip), GFP_KERNEL);
+	chip = devm_kzalloc(dev, sizeof(struct sm5708_chip), GFP_KERNEL);
 	if (!chip)
 		return -ENOMEM;
 
 	i2c_set_clientdata(i2c, chip);
-	chip->dev = &i2c->dev;
+	chip->dev = dev;
 	chip->i2c = i2c;
 	chip->irq = i2c->irq;
 	mutex_init(&chip->mode_mutex);
 
-	chip->regmap = devm_regmap_init_i2c(i2c,
-			&sm5708_regmap_config);
+	chip->regmap = devm_regmap_init_i2c(i2c, &sm5708_regmap_config);
 
-	ret = regmap_add_irq_chip(chip->regmap, chip->irq,
-			IRQF_TRIGGER_LOW | IRQF_ONESHOT | IRQF_NO_SUSPEND,
-			0, &sm5708_irq_chip, &chip->irq_data);
+	ret = regmap_read(chip->regmap, SM5708_REG_DEVICEID, &regval);
 	if (ret) {
-		dev_err(&i2c->dev, "Failed to add IRQ chip: %d\n", ret);
+		dev_err(dev, "Failed to read dev_id: %d\n", ret);
 		return ret;
 	}
 
-	ret = devm_mfd_add_devices(chip->dev, -1, sm5708_devs,
+	if (regval != 0xF9) {
+		dev_err(dev, "Unknown DEVICEID: %#04x\n", regval);
+		return -ENODEV;
+	}
+
+	ret = devm_regmap_add_irq_chip(dev, chip->regmap, chip->irq,
+			IRQF_TRIGGER_LOW | IRQF_ONESHOT | IRQF_NO_SUSPEND,
+			0, &sm5708_irq_chip, &chip->irq_data);
+	if (ret) {
+		dev_err(dev, "Failed to add IRQ chip: %d\n", ret);
+		return ret;
+	}
+
+	ret = devm_mfd_add_devices(dev, -1, sm5708_devs,
 			ARRAY_SIZE(sm5708_devs), NULL, 0, NULL);
 	if (ret < 0)
 		return ret;
 
-	device_init_wakeup(chip->dev, 0);
+	device_init_wakeup(dev, 0);
 
 	return 0;
 }
