@@ -93,6 +93,16 @@
 		display0 = &mdss;
 		mmc0 = &sdhc_1;
 		mmc1 = &sdhc_2;
+		i2c1 = &i2c_1;
+		i2c2 = &i2c_2;
+		i2c3 = &i2c_3;
+		i2c4 = &i2c_4;
+		i2c5 = &i2c_5;
+		i2c6 = &i2c_6;
+		i2c7 = &i2c_7;
+		i2c8 = &i2c_8;
+		i2c9 = &cci_i2c0;
+		i2c10 = &cci_i2c1;
 	};
 
 	chosen {
@@ -767,6 +777,21 @@
 				bias-pull-up;
 			};
 
+			i2c_1_default: i2c-1-default-pins {
+				pins = "gpio2", "gpio3";
+				function = "blsp_i2c1";
+				drive-strength = <2>;
+				bias-disable;
+			};
+
+			i2c_1_sleep: i2c-1-sleep-pins {
+				pins = "gpio2", "gpio3";
+				function = "gpio";
+				drive-strength = <2>;
+				bias-disable;
+			};
+
+
 			i2c_2_default: i2c-2-default-pins {
 				pins = "gpio6", "gpio7";
 				function = "blsp_i2c2";
@@ -795,6 +820,20 @@
 				bias-disable;
 			};
 
+			i2c_4_default: i2c-4-default-pins {
+				pins = "gpio14", "gpio15";
+				function = "blsp_i2c4";
+				drive-strength = <2>;
+				bias-disable;
+			};
+
+			i2c_4_sleep: i2c-4-sleep-pins {
+				pins = "gpio14", "gpio15";
+				function = "gpio";
+				drive-strength = <2>;
+				bias-disable;
+			};
+
 			i2c_5_default: i2c-5-default-pins {
 				pins = "gpio18", "gpio19";
 				function = "blsp_i2c5";
@@ -804,6 +843,48 @@
 
 			i2c_5_sleep: i2c-5-sleep-pins {
 				pins = "gpio18", "gpio19";
+				function = "gpio";
+				drive-strength = <2>;
+				bias-disable;
+			};
+
+			i2c_6_default: i2c-6-default-pins {
+				pins = "gpio22", "gpio23";
+				function = "blsp_i2c6";
+				drive-strength = <2>;
+				bias-disable;
+			};
+
+			i2c_6_sleep: i2c-6-sleep-pins {
+				pins = "gpio22", "gpio23";
+				function = "gpio";
+				drive-strength = <2>;
+				bias-disable;
+			};
+
+			i2c_7_default: i2c-7-default-pins {
+				pins = "gpio135", "gpio136";
+				function = "blsp_i2c7";
+				drive-strength = <2>;
+				bias-disable;
+			};
+
+			i2c_7_sleep: i2c-7-sleep-pins {
+				pins = "gpio135", "gpio136";
+				function = "gpio";
+				drive-strength = <2>;
+				bias-disable;
+			};
+
+			i2c_8_default: i2c-8-default-pins {
+				pins = "gpio98", "gpio99";
+				function = "blsp_i2c8";
+				drive-strength = <2>;
+				bias-disable;
+			};
+
+			i2c_8_sleep: i2c-8-sleep-pins {
+				pins = "gpio98", "gpio99";
 				function = "gpio";
 				drive-strength = <2>;
 				bias-disable;
@@ -1852,6 +1933,24 @@
 			status = "disabled";
 		};
 
+		i2c_1: i2c@78b5000 { // BLSP1 QUP1
+			compatible = "qcom,i2c-qup-v2.2.1";
+			reg = <0x78b5000 0x600>;
+			interrupts = <GIC_SPI 95 IRQ_TYPE_LEVEL_HIGH>;
+			clock-names = "iface", "core";
+			clocks = <&gcc GCC_BLSP1_AHB_CLK>,
+				 <&gcc GCC_BLSP1_QUP1_I2C_APPS_CLK>;
+
+			pinctrl-names = "default", "sleep";
+			pinctrl-0 = <&i2c_1_default>;
+			pinctrl-1 = <&i2c_1_sleep>;
+
+			#address-cells = <1>;
+			#size-cells = <0>;
+
+			status = "disabled";
+		};
+
 		i2c_2: i2c@78b6000 { // BLSP1 QUP2
 			compatible = "qcom,i2c-qup-v2.2.1";
 			reg = <0x78b6000 0x600>;
@@ -1887,6 +1986,23 @@
 			status = "disabled";
 		};
 
+		i2c_4: i2c@78b8000 { // BLSP1 QUP4
+			compatible = "qcom,i2c-qup-v2.2.1";
+			reg = <0x78b8000 0x600>;
+			interrupts = <GIC_SPI 98 IRQ_TYPE_LEVEL_HIGH>;
+			clock-names = "iface", "core";
+			clocks = <&gcc GCC_BLSP1_AHB_CLK>,
+				 <&gcc GCC_BLSP1_QUP4_I2C_APPS_CLK>;
+			pinctrl-names = "default", "sleep";
+			pinctrl-0 = <&i2c_4_default>;
+			pinctrl-1 = <&i2c_4_sleep>;
+
+			#address-cells = <1>;
+			#size-cells = <0>;
+
+			status = "disabled";
+		};
+
 		dma_blsp2: qcom,sps-dma@7ac4000 {
 			compatible = "qcom,bam-v1.7.0";
 			reg = <0x7ac4000 0x25000>;
@@ -1903,14 +2019,63 @@
 			compatible = "qcom,i2c-qup-v2.2.1";
 			reg = <0x7af5000 0x600>;
 			interrupts = <GIC_SPI 299 IRQ_TYPE_LEVEL_HIGH>;
-			qcom,clk-freq-out = <400000>;
-			qcom,clk-freq-in  = <19200000>;
 			clock-names = "iface", "core";
 			clocks = <&gcc GCC_BLSP2_AHB_CLK>,
 				 <&gcc GCC_BLSP2_QUP1_I2C_APPS_CLK>;
 			pinctrl-names = "default", "sleep";
 			pinctrl-0 = <&i2c_5_default>;
 			pinctrl-1 = <&i2c_5_sleep>;
+
+			#address-cells = <1>;
+			#size-cells = <0>;
+
+			status = "disabled";
+		};
+
+		i2c_6: i2c@7af6000 { // BLSP2 QUP2
+			compatible = "qcom,i2c-qup-v2.2.1";
+			reg = <0x7af6000 0x600>;
+			interrupts = <GIC_SPI 300 IRQ_TYPE_LEVEL_HIGH>;
+			clock-names = "iface", "core";
+			clocks = <&gcc GCC_BLSP2_AHB_CLK>,
+				 <&gcc GCC_BLSP2_QUP2_I2C_APPS_CLK>;
+			pinctrl-names = "default", "sleep";
+			pinctrl-0 = <&i2c_6_default>;
+			pinctrl-1 = <&i2c_6_sleep>;
+
+			#address-cells = <1>;
+			#size-cells = <0>;
+
+			status = "disabled";
+		};
+
+		i2c_7: i2c@7af7000 { // BLSP2 QUP3
+			compatible = "qcom,i2c-qup-v2.2.1";
+			reg = <0x7af7000 0x600>;
+			interrupts = <GIC_SPI 301 IRQ_TYPE_LEVEL_HIGH>;
+			clock-names = "iface", "core";
+			clocks = <&gcc GCC_BLSP2_AHB_CLK>,
+				 <&gcc GCC_BLSP2_QUP3_I2C_APPS_CLK>;
+			pinctrl-names = "default", "sleep";
+			pinctrl-0 = <&i2c_7_default>;
+			pinctrl-1 = <&i2c_7_sleep>;
+
+			#address-cells = <1>;
+			#size-cells = <0>;
+
+			status = "disabled";
+		};
+
+		i2c_8: i2c@7af8000 { // BLSP2 QUP4
+			compatible = "qcom,i2c-qup-v2.2.1";
+			reg = <0x7af8000 0x600>;
+			interrupts = <GIC_SPI 302 IRQ_TYPE_LEVEL_HIGH>;
+			clock-names = "iface", "core";
+			clocks = <&gcc GCC_BLSP2_AHB_CLK>,
+				 <&gcc GCC_BLSP2_QUP4_I2C_APPS_CLK>;
+			pinctrl-names = "default", "sleep";
+			pinctrl-0 = <&i2c_8_default>;
+			pinctrl-1 = <&i2c_8_sleep>;
 
 			#address-cells = <1>;
 			#size-cells = <0>;
