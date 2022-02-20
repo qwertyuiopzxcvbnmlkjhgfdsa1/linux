@@ -19,6 +19,7 @@ properties:
       - qcom,riva-pil
       - qcom,pronto-v1-pil
       - qcom,pronto-v2-pil
+      - qcom,pronto-v3-pil
 
   reg:
     #$ref: /schemas/types.yaml#/definitions/phandle-array
@@ -139,15 +140,16 @@ if:
         enum:
           - qcom,pronto-v1-pil
           - qcom,pronto-v2-pil
+          - qcom,pronto-v3-pil
 then:
   properties:
     vddmx-supply:
       deprecated: true
-      description: Deprecated for qcom,pronto-v1/2-pil
+      description: Deprecated for qcom,pronto-v1/2/3-pil
 
     vddcx-supply:
       deprecated: true
-      description: Deprecated for qcom,pronto-v1/2-pil
+      description: Deprecated for qcom,pronto-v1/2/3-pil
 
   required:
     - power-domains
