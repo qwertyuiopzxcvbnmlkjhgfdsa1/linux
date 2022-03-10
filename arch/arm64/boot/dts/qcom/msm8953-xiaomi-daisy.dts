@@ -122,20 +122,48 @@
 	status = "okay";
 
 	gt9xx@5d {
-		compatible = "goodix,gt917s";
+		compatible = "goodix,gt9xx";
 		reg = <0x5d>;
 
 		interrupt-parent = <&tlmm>;
 		interrupts = <65 IRQ_TYPE_EDGE_FALLING>;
 
-		reset-gpios = <&tlmm 64 GPIO_ACTIVE_HIGH>;
-		irq-gpios = <&tlmm 65 GPIO_ACTIVE_HIGH>;
+		reset-gpios = <&tlmm 12 0x0>;
+		irq-gpios = <&tlmm 13 0x2800>;
 
 		AVDD28-supply = <&pm8953_l10>;
 		VDDIO-supply = <&pm8953_l6>;
 
 		touchscreen-size-x = <1080>;
-		touchscreen-size-y = <2280>;
+		touchscreen-size-y = <1920>;
+		touchscreen-max-w = <1024>;
+		touchscreen-max-p = <1024>;
+
+		irq-flags = <2>;
+
+		goodix,type-a-report = <0>;
+		goodix,driver-send-cfg = <1>;
+		goodix,create-wr-node = <1>;
+		goodix,wakeup-with-reset = <0>;
+		goodix,resume-in-workqueue = <0>;
+		goodix,int-sync = <1>;
+		goodix,swap-x2y = <0>;
+		goodix,esd-protect = <1>;
+		goodix,pen-suppress-finger = <0>; 
+		goodix,auto-update = <0>;
+		goodix,auto-update-cfg = <0>;
+		goodix,power-off-sleep = <0>;
+	
+		goodix.cfg-group0 = [
+		00 38 04 80 07 0A 3D 00 01 CA 28 0A 5A 3C 0A 04 00 00 00 00 11 11 00 17 19 1E 14 95 35 FF 
+		2E 30 09 19 00 00 00 01 04 1C 00 00 00 00 00 00 00 00 00 00 00 19 41 94 45 02 07 00 00 04 
+		9A 1B 00 85 21 FF 74 28 00 66 31 00 5B 3B 00 5B 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+		00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 1D 1C 1B 1A 19 18 17 16 
+		15 14 13 12 11 10 0F 0E 0D 0C 0B 0A 09 08 07 06 05 04 03 02 01 00 2A 29 28 27 26 25 24 23 
+		22 21 20 1F 1E 1D 1C 1B 19 18 17 16 15 14 13 12 11 10 0F 0E 0D 0C 0B 0A 09 08 07 06 05 04 
+		03 02 01 00 89 01
+		];
+
 	};
 
 	focaltech@38 {
