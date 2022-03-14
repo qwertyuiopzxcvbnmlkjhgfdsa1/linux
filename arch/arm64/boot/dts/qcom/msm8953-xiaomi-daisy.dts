@@ -130,8 +130,7 @@
 		interrupts = <65 IRQ_TYPE_EDGE_FALLING>;
 
 		reset-gpios = <&tlmm 64 0x0>;
-
-		vcc-supply = <&pm8953_l10>;
+		irq-gpios = <&tlmm 65 0x2008>;
 
 		AVDD28-supply = <&pm8953_l10>;
 		VDDIO-supply = <&pm8953_l6>;
