@@ -127,10 +127,10 @@
 		status = "okay";
 
 		interrupt-parent = <&tlmm>;
-		interrupts = <13 IRQ_TYPE_LEVEL_HIGH>;
+		interrupts = <65 IRQ_TYPE_LEVEL_HIGH>;
 
-		reset-gpios = <&tlmm 12 GPIO_ACTIVE_HIGH>;
-		irq-gpios = <&tlmm 13 GPIO_ACTIVE_HIGH>;
+		reset-gpios = <&tlmm 64 GPIO_ACTIVE_HIGH>;
+		irq-gpios = <&tlmm 65 GPIO_ACTIVE_HIGH>
 
 		AVDD28-supply = <&pm8953_l10>;
 		VDDIO-supply = <&pm8953_l6>;
