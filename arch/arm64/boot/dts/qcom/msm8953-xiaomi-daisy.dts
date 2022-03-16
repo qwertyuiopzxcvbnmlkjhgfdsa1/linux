@@ -124,7 +124,7 @@
 	gt917@5d {
 		compatible = "goodix,gt917d";
 		reg = <0x5d>;
-		interrupts = <13 IRQ_TYPE_EDGE_FALLING>;
+		interrupts = <65 IRQ_TYPE_EDGE_FALLING>;
 
 	};
 
