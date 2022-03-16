@@ -123,14 +123,9 @@
 
 	gt9xx@5d {
 		compatible = "goodix,gt917d";
-		reg = <0x5d>;
+		reg = <0x14>;
+		interrupts = <13 0x2800>;
 
-		interrupt-parent = <&tlmm>;
-		interrupts = <65 IRQ_TYPE_LEVEL_HIGH>;
-
-
-		touchscreen-size-x = <1080>;
-		touchscreen-size-y = <2280>;
 	};
 
 	focaltech@38 {
