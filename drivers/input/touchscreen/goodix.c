@@ -159,6 +159,8 @@ static const struct dmi_system_id inverted_x_screen[] = {
  */
 int goodix_i2c_read(struct i2c_client *client, u16 reg, u8 *buf, int len)
 {
+    dev_err(&client->dev, "DEBUG Method goodix_i2c_read client->addr= %d u16Reg= %x u8Buf= %d  len=%d\n",
+            client->addr, reg, u8, len);
 	struct i2c_msg msgs[2];
 	__be16 wbuf = cpu_to_be16(reg);
 	int ret;
@@ -509,7 +511,7 @@ static int goodix_check_cfg(struct goodix_ts_data *ts, const u8 *cfg, int len)
 int goodix_send_cfg(struct goodix_ts_data *ts, const u8 *cfg, int len)
 {
 	int error;
-
+    dev_err(&ts->client->dev, "DEBUG Config will be sent.");
 	error = goodix_check_cfg(ts, cfg, len);
 	if (error)
 		return error;
@@ -518,7 +520,7 @@ int goodix_send_cfg(struct goodix_ts_data *ts, const u8 *cfg, int len)
 	if (error)
 		return error;
 
-	dev_dbg(&ts->client->dev, "Config sent successfully.");
+	dev_err(&ts->client->dev, "DEUG Config sent successfully.");
 
 	/* Let the firmware reconfigure itself, so sleep for 10ms */
 	usleep_range(10000, 11000);
