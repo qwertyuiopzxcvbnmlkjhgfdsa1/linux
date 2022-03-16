@@ -122,18 +122,12 @@
 	status = "okay";
 
 	gt9xx@5d {
-		compatible = "goodix,gt9xx";
+		compatible = "goodix,gt917d";
 		reg = <0x5d>;
-		status = "okay";
 
 		interrupt-parent = <&tlmm>;
 		interrupts = <65 IRQ_TYPE_LEVEL_HIGH>;
 
-		reset-gpios = <&tlmm 64 GPIO_ACTIVE_HIGH>;
-		irq-gpios = <&tlmm 65 GPIO_ACTIVE_HIGH>;
-
-		AVDD28-supply = <&pm8953_l10>;
-		VDDIO-supply = <&pm8953_l6>;
 
 		touchscreen-size-x = <1080>;
 		touchscreen-size-y = <2280>;
