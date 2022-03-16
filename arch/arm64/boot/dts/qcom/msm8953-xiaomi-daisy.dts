@@ -121,10 +121,10 @@
 &i2c_3 {
 	status = "okay";
 
-	gt9xx@5d {
+	gt917@5d {
 		compatible = "goodix,gt917d";
 		reg = <0x5d>;
-		interrupts = <13 IRQ_TYPE_LEVEL_HIGH>;
+		interrupts = <13 IRQ_TYPE_EDGE_FALLING>;
 
 	};
 
