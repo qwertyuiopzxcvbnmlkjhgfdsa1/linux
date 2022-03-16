@@ -123,8 +123,8 @@
 
 	gt9xx@5d {
 		compatible = "goodix,gt917d";
-		reg = <0x14>;
-		interrupts = <13 0x2800>;
+		reg = <0x5d>;
+		interrupts = <13 IRQ_TYPE_LEVEL_HIGH>;
 
 	};
 
