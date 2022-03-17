@@ -159,8 +159,8 @@ static const struct dmi_system_id inverted_x_screen[] = {
  */
 int goodix_i2c_read(struct i2c_client *client, u16 reg, u8 *buf, int len)
 {
-    dev_err(&client->dev, "DEBUG Method goodix_i2c_read client->addr= %d u16Reg= %x u8Buf= %d  len=%d\n",
-            client->addr, reg, u8, len);
+    dev_err(&client->dev, "DEBUG Method goodix_i2c_read client->addr= %d u16Reg= %x u8Buf= %hhn  len=%d\n",
+            client->addr, reg, buf, len);
 	struct i2c_msg msgs[2];
 	__be16 wbuf = cpu_to_be16(reg);
 	int ret;
@@ -860,7 +860,7 @@ retry_get_irq_gpio:
 	if (IS_ERR(gpiod)) {
 		error = PTR_ERR(gpiod);
 		if (error != -EPROBE_DEFER)
-			dev_dbg(dev, "Failed to get %s GPIO: %d\n",
+			dev_err(dev, "Failed to get %s GPIO: %d\n",
 				GOODIX_GPIO_INT_NAME, error);
 		return error;
 	}
@@ -877,7 +877,7 @@ retry_get_irq_gpio:
 	if (IS_ERR(gpiod)) {
 		error = PTR_ERR(gpiod);
 		if (error != -EPROBE_DEFER)
-			dev_dbg(dev, "Failed to get %s GPIO: %d\n",
+			dev_err(dev, "Failed to get %s GPIO: %d\n",
 				GOODIX_GPIO_RST_NAME, error);
 		return error;
 	}
@@ -1074,13 +1074,13 @@ static int goodix_configure_dev(struct goodix_ts_data *ts)
 	if (dmi_check_system(nine_bytes_report)) {
 		ts->contact_size = 9;
 
-		dev_dbg(&ts->client->dev,
+		dev_err(&ts->client->dev,
 			"Non-standard 9-bytes report format quirk\n");
 	}
 
 	if (dmi_check_system(inverted_x_screen)) {
 		ts->prop.invert_x = true;
-		dev_dbg(&ts->client->dev,
+		dev_err(&ts->client->dev,
 			"Applying 'inverted x screen' quirk\n");
 	}
 
@@ -1161,7 +1161,7 @@ static int goodix_ts_probe(struct i2c_client *client,
 	const char *cfg_name;
 	int error;
 
-	dev_dbg(&client->dev, "I2C Address: 0x%02x\n", client->addr);
+	dev_err(&client->dev, "I2C Address: 0x%02x\n", client->addr);
 
 	if (!i2c_check_functionality(client->adapter, I2C_FUNC_I2C)) {
 		dev_err(&client->dev, "I2C check functionality failed.\n");
