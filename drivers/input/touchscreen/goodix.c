@@ -159,7 +159,7 @@ static const struct dmi_system_id inverted_x_screen[] = {
  */
 int goodix_i2c_read(struct i2c_client *client, u16 reg, u8 *buf, int len)
 {
-    dev_err(&client->dev, "DEBUG Method goodix_i2c_read client->addr= %d u16Reg= %x u8Buf= %hhn  len=%d\n",
+    dev_err(&client->dev, "DEBUG Method goodix_i2c_read client->addr= %d u16Reg= %x u8Buf= %s  len=%d\n",
             client->addr, reg, buf, len);
 	struct i2c_msg msgs[2];
 	__be16 wbuf = cpu_to_be16(reg);
