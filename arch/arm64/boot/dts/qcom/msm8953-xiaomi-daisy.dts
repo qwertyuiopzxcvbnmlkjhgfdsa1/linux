@@ -121,11 +121,12 @@
 &i2c_3 {
 	status = "okay";
 
-	gt917@5d {
-		compatible = "goodix,gt917d";
-		reg = <0x5d>;
+    gt9xx-i2c@14 {
+        compatible = "goodix,gt9xx";
+        status = "okay";
+        reg = <0x14>;
 		interrupts = <65 IRQ_TYPE_EDGE_FALLING>;
-
+        interrupt-parent = <&tlmm>;
 	};
 
 	focaltech@38 {
