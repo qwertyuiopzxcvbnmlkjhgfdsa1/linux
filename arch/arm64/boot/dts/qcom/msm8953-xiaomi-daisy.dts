@@ -125,7 +125,7 @@
         compatible = "goodix,gt9xx";
         status = "okay";
         reg = <0x14>;
-		interrupts = <65 IRQ_TYPE_EDGE_FALLING>;
+		interrupts = <65 IRQ_TYPE_LEVEL_HIGH>;
         interrupt-parent = <&tlmm>;
 	};
 
