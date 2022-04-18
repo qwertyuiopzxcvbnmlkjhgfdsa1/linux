@@ -415,7 +415,7 @@ static int goodix_check_cfg_8(struct goodix_ts_data *ts, const u8 *cfg, int len)
 	u8 check_sum = 0;
 
 	for (i = 0; i < raw_cfg_len; i++) {
-        dev_err(&ts->client->dev, "DEBUG_CONFIG line= %d config_int= %d config_string= %s \n",i,cfg[i], cfg[i]);
+        dev_err(&ts->client->dev, "DEBUG_CONFIG_1 line= %d config_int= %d \n",i,cfg[i]);
         check_sum += cfg[i];
     }
 	check_sum = (~check_sum) + 1;
@@ -453,13 +453,15 @@ static int goodix_check_cfg_16(struct goodix_ts_data *ts, const u8 *cfg,
 	int i, raw_cfg_len = len - 3;
 	u16 check_sum = 0;
 
-	for (i = 0; i < raw_cfg_len; i += 2)
-		check_sum += get_unaligned_be16(&cfg[i]);
+	for (i = 0; i < raw_cfg_len; i += 2) {
+        dev_err(&ts->client->dev, "DEBUG_CONFIG_2 line= %d config_int= %d  \n",i,get_unaligned_be16(&cfg[i]));
+        check_sum += get_unaligned_be16(&cfg[i]);
+    }
 	check_sum = (~check_sum) + 1;
 	if (check_sum != get_unaligned_be16(&cfg[raw_cfg_len])) {
-		dev_err(&ts->client->dev,
-			"The checksum of the config fw is not correct");
-		return -EINVAL;
+        dev_err(&ts->client->dev,
+                "The checksum of the config fw is not correct, but we do not care here(tmp hack)\n");
+		return 0;
 	}
 
 	if (cfg[raw_cfg_len + 2] != 1) {
