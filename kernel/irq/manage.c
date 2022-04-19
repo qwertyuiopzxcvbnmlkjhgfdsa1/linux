@@ -2136,20 +2136,26 @@ int request_threaded_irq(unsigned int irq, irq_handler_t handler,
 	if (((irqflags & IRQF_SHARED) && !dev_id) ||
 	    ((irqflags & IRQF_SHARED) && (irqflags & IRQF_NO_AUTOEN)) ||
 	    (!(irqflags & IRQF_SHARED) && (irqflags & IRQF_COND_SUSPEND)) ||
-	    ((irqflags & IRQF_NO_SUSPEND) && (irqflags & IRQF_COND_SUSPEND)))
-		return -EINVAL;
+	    ((irqflags & IRQF_NO_SUSPEND) && (irqflags & IRQF_COND_SUSPEND))) {
+        pr_err("DEBUG_ERR request_threaded_irq So we end here in this f hole, not knowing why= %d \n",-EINVAL);
+        return -EINVAL;
+    }
 
 	desc = irq_to_desc(irq);
-	if (!desc)
-		return -EINVAL;
+	if (!desc) {
+        pr_err("DEBUG_ERR request_threaded_irq irq_to_descsome desc is wrong= %s \n",desc);
+        return -EINVAL;
+    }
 
 	if (!irq_settings_can_request(desc) ||
 	    WARN_ON(irq_settings_is_per_cpu_devid(desc)))
 		return -EINVAL;
 
 	if (!handler) {
-		if (!thread_fn)
-			return -EINVAL;
+		if (!thread_fn) {
+            pr_err("DEBUG_ERR request_threaded_irq not thread_fn defined \n");
+            return -EINVAL;
+        }
 		handler = irq_default_primary_handler;
 	}
 
@@ -2165,6 +2171,7 @@ int request_threaded_irq(unsigned int irq, irq_handler_t handler,
 
 	retval = irq_chip_pm_get(&desc->irq_data);
 	if (retval < 0) {
+        pr_err("DEBUG_ERR request_threaded_irq retval here is not ok, is wrong= %s \n",retval);
 		kfree(action);
 		return retval;
 	}
@@ -2172,6 +2179,7 @@ int request_threaded_irq(unsigned int irq, irq_handler_t handler,
 	retval = __setup_irq(irq, desc, action);
 
 	if (retval) {
+        pr_err("DEBUG_ERR request_threaded_irq retval here is bugger than it should be, is wrong= %s \n",retval);
 		irq_chip_pm_put(&desc->irq_data);
 		kfree(action->secondary);
 		kfree(action);

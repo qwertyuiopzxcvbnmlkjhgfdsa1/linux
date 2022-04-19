@@ -63,10 +63,11 @@ int devm_request_threaded_irq(struct device *dev, unsigned int irq,
 
 	if (!devname)
 		devname = dev_name(dev);
-
+    pr_err("INPUT_TO  request_threaded_irq irq= %d , handler= %s, thread_fn= %s , irqflags= %lu, devname= %s, dev_id= %s  \n",irq,handler,thread_fn,irqflags,devname,dev_id);
 	rc = request_threaded_irq(irq, handler, thread_fn, irqflags, devname,
 				  dev_id);
 	if (rc) {
+        pr_err("DEBUG_ERR request_threaded_irq Returned error from irq %d \n",rc);
 		devres_free(dr);
 		return rc;
 	}
