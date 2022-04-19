@@ -121,8 +121,8 @@
 &i2c_3 {
 	status = "okay";
 
-    gt9xx@5d {
-        compatible = "goodix,gt917d","goodix,gt917s";
+    gt917d@5d {
+        compatible = "goodix,gt917d";
         reg = <0x5d>;
 
         interrupt-parent = <&tlmm>;
