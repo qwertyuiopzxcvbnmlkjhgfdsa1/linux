@@ -937,6 +937,8 @@ static void goodix_read_config(struct goodix_ts_data *ts)
 		error = goodix_i2c_read(ts->client, ts->chip->config_addr,
 					ts->config, ts->chip->config_len);
 		if (error) {
+            dev_err(&ts->client->dev,
+                    "ERROR_!@# goodix_i2c_read  %d", error);
 			ts->int_trigger_type = GOODIX_INT_TRIGGER;
 			ts->max_touch_num = GOODIX_MAX_CONTACTS;
 			return;
@@ -1132,15 +1134,19 @@ static void goodix_config_cb(const struct firmware *cfg, void *ctx)
 			goto err_release_cfg;
 
 		error = goodix_check_cfg(ts, cfg->data, cfg->size);
-		if (error)
-			goto err_release_cfg;
+		if (error) {
+            dev_err(&client->dev,"ERROR goodix_check_cfg  %d\n", error);
+            goto err_release_cfg;
+        }
 
 		memcpy(ts->config, cfg->data, cfg->size);
 	} else if (cfg) {
 		/* send device configuration to the firmware */
 		error = goodix_send_cfg(ts, cfg->data, cfg->size);
-		if (error)
-			goto err_release_cfg;
+		if (error) {
+            dev_err(&client->dev,"ERROR goodix_send_cfg  %d\n", error);
+            goto err_release_cfg;
+        }
 	}
 
 	goodix_configure_dev(ts);
@@ -1344,8 +1350,10 @@ static int __maybe_unused goodix_resume(struct device *dev)
 	 * for 2ms~5ms.
 	 */
 	error = goodix_irq_direction_output(ts, 1);
-	if (error)
-		return error;
+	if (error) {
+        dev_err(dev, "DEBUG goodix_irq_direction_output Error happened %d\n",error);
+        return error;
+    }
 
 	usleep_range(2000, 5000);
 
@@ -1356,22 +1364,28 @@ static int __maybe_unused goodix_resume(struct device *dev)
 	error = goodix_i2c_read(ts->client, ts->chip->config_addr,
 				&config_ver, 1);
 	if (!error && config_ver != ts->config[0])
-		dev_info(dev, "Config version mismatch %d != %d, resetting controller\n",
+		dev_err(dev, "Config version mismatch %d != %d, resetting controller\n",
 			 config_ver, ts->config[0]);
 
 	if (error != 0 || config_ver != ts->config[0]) {
 		error = goodix_reset(ts);
-		if (error)
-			return error;
+		if (error) {
+            dev_err(dev, "DEBUG goodix_reset Error happened %d\n",error);
+            return error;
+        }
 
 		error = goodix_send_cfg(ts, ts->config, ts->chip->config_len);
-		if (error)
-			return error;
+		if (error) {
+            dev_err(dev, "DEBUG goodix_send_cfg Error happened %d\n",error);
+            return error;
+        }
 	}
 
 	error = goodix_request_irq(ts);
-	if (error)
-		return error;
+	if (error) {
+        dev_err(dev, "DEBUG goodix_request_irq Error happened %d\n",error);
+        return error;
+    }
 
 	return 0;
 }
