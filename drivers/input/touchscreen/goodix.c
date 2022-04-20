@@ -1135,7 +1135,7 @@ static void goodix_config_cb(const struct firmware *cfg, void *ctx)
 
 		error = goodix_check_cfg(ts, cfg->data, cfg->size);
 		if (error) {
-            dev_err(&client->dev,"ERROR goodix_check_cfg  %d\n", error);
+            dev_err(&ts->client->dev,"ERROR goodix_check_cfg  %d\n", error);
             goto err_release_cfg;
         }
 
@@ -1144,7 +1144,7 @@ static void goodix_config_cb(const struct firmware *cfg, void *ctx)
 		/* send device configuration to the firmware */
 		error = goodix_send_cfg(ts, cfg->data, cfg->size);
 		if (error) {
-            dev_err(&client->dev,"ERROR goodix_send_cfg  %d\n", error);
+            dev_err(&ts->client->dev,"ERROR goodix_send_cfg  %d\n", error);
             goto err_release_cfg;
         }
 	}
