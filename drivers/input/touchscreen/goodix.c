@@ -415,7 +415,7 @@ static int goodix_check_cfg_8(struct goodix_ts_data *ts, const u8 *cfg, int len)
 	u8 check_sum = 0;
 
 	for (i = 0; i < raw_cfg_len; i++) {
-        dev_err(&ts->client->dev, "DEBUG_CONFIG_1 line= %d config_int= %d \n",i,cfg[i]);
+//        dev_err(&ts->client->dev, "DEBUG_CONFIG_1 line= %d config_int= %d \n",i,cfg[i]);
         check_sum += cfg[i];
     }
 	check_sum = (~check_sum) + 1;
@@ -454,7 +454,7 @@ static int goodix_check_cfg_16(struct goodix_ts_data *ts, const u8 *cfg,
 	u16 check_sum = 0;
 
 	for (i = 0; i < raw_cfg_len; i += 2) {
-        dev_err(&ts->client->dev, "DEBUG_CONFIG_2 line= %d config_int= %d  \n",i,get_unaligned_be16(&cfg[i]));
+//        dev_err(&ts->client->dev, "DEBUG_CONFIG_2 line= %d config_int= %d  \n",i,get_unaligned_be16(&cfg[i]));
         check_sum += get_unaligned_be16(&cfg[i]);
     }
 	check_sum = (~check_sum) + 1;
