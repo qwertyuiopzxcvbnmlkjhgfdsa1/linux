@@ -2144,9 +2144,27 @@ int request_threaded_irq(unsigned int irq, irq_handler_t handler,
         return -EINVAL;
     }
 
-    pr_err("DEBUG_ERR request_threaded_irq irq_to_descsome irq is= %s \n",irq);
+    pr_err("DEBUG_ERR_IRQ request_threaded_irq irq_to_descsome irq= %s \n",irq);
 	desc = irq_to_desc(irq);
 	if (!desc) {
+        pr_err("DEBUG_ERR_IRQ request_threaded_irq irq_to_descsome desc is wrong= %s, with irq=%d \n",desc,irq);
+//        return -EINVAL;
+    }
+
+    int a;
+
+    /* for loop execution */
+    for( a = 0; a < 100; a = a + 1 ){
+//        pr_err("DEBUG_ERR_IRQ_LOOP survive this loop? request_threaded_irq irq_to_descsome irq(a)= %s \n",a);
+        desc = irq_to_desc(a);
+        if (!desc) {
+            pr_err("DEBUG_ERR_IRQ_LOOP request_threaded_irq irq_to_descsome desc is wrong= %s for irq(a)=%d \n",desc,a);
+        } else {
+            pr_err("DEBUG_ERR_IRQ_LOOP_OK YES request_threaded_irq irq_to_descsome desc is ok= %s for irq(a)=%d \n",desc,a);
+        }
+    }
+
+    if (!desc) {
         pr_err("DEBUG_ERR request_threaded_irq irq_to_descsome desc is wrong= %s \n",desc);
         return -EINVAL;
     }
