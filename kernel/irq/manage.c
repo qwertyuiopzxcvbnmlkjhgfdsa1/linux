@@ -2153,7 +2153,7 @@ int request_threaded_irq(unsigned int irq, irq_handler_t handler,
 
     int a;
 
-    /* for loop exexcution */
+    /* for loop exxcution */
     for( a = 0; a < 100; a = a + 1 ){
 //        pr_err("DEBUG_ERR_IRQ_LOOP survive this loop? request_threaded_irq irq_to_descsome irq(a)= %s \n",a);
         desc = irq_to_desc(a);
