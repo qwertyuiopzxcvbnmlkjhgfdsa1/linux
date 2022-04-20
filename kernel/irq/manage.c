@@ -94,6 +94,7 @@ static void __synchronize_hardirq(struct irq_desc *desc, bool sync_chip)
  *	hardware level, but not serviced yet, as this might deadlock when
  *	called with interrupts disabled and the target CPU of the interrupt
  *	is the current CPU.
+ *	 pr_err("DEBUG_ERR request_threaded_irq So we end here in this f hole, not knowing why= %d \n",-EINVAL);
  */
 bool synchronize_hardirq(unsigned int irq)
 {
@@ -2108,6 +2109,8 @@ const void *free_nmi(unsigned int irq, void *dev_id)
  *	IRQF_SHARED		Interrupt is shared
  *	IRQF_TRIGGER_*		Specify active edge(s) or level
  *	IRQF_ONESHOT		Run thread_fn with interrupt line masked
+ *	 INPUT_TO  request_threaded_irq irq= 0 , handler= (null), thread_fn= ?#\x03\xd5\xfd{\xb4\xa9 ,
+ *	 irqflags= 8193, devname= gt917d, dev_id=
  */
 int request_threaded_irq(unsigned int irq, irq_handler_t handler,
 			 irq_handler_t thread_fn, unsigned long irqflags,
@@ -2141,6 +2144,7 @@ int request_threaded_irq(unsigned int irq, irq_handler_t handler,
         return -EINVAL;
     }
 
+    pr_err("DEBUG_ERR request_threaded_irq irq_to_descsome irq is= %s \n",irq);
 	desc = irq_to_desc(irq);
 	if (!desc) {
         pr_err("DEBUG_ERR request_threaded_irq irq_to_descsome desc is wrong= %s \n",desc);

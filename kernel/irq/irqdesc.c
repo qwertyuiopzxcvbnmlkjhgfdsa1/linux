@@ -350,6 +350,7 @@ static void irq_insert_desc(unsigned int irq, struct irq_desc *desc)
 
 struct irq_desc *irq_to_desc(unsigned int irq)
 {
+    pr_err("DEBUG_ERR_IRQDESC irq_to_desc what now? irq= %d , irq_desc_tree=%s\n",irq,&irq_desc_tree);
 	return radix_tree_lookup(&irq_desc_tree, irq);
 }
 #ifdef CONFIG_KVM_BOOK3S_64_HV_MODULE
@@ -582,6 +583,7 @@ int __init early_irq_init(void)
 
 struct irq_desc *irq_to_desc(unsigned int irq)
 {
+    pr_err("DEBUG_ERR_IRQDESC irq_to_desc what now_2? irq= %d \n",irq);
 	return (irq < NR_IRQS) ? irq_desc + irq : NULL;
 }
 EXPORT_SYMBOL(irq_to_desc);
