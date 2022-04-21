@@ -123,7 +123,9 @@
 
     gt917d@5d {
         compatible = "goodix,gt917d";
+        status = "okay";
         reg = <0x5d>;
+        irq-flags = <2>;
 
         interrupt-parent = <&tlmm>;
         interrupts = <65 IRQ_TYPE_LEVEL_HIGH>;

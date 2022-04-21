@@ -97,7 +97,6 @@ static const struct goodix_chip_id goodix_chip_ids[] = {
 	{ .id = "5663", .data = &gt1x_chip_data },
 	{ .id = "5688", .data = &gt1x_chip_data },
 	{ .id = "917S", .data = &gt1x_chip_data },
-	{ .id = "917D", .data = &gt967_chip_data },
 	{ .id = "9286", .data = &gt1x_chip_data },
 
 	{ .id = "911", .data = &gt911_chip_data },
@@ -107,6 +106,7 @@ static const struct goodix_chip_id goodix_chip_ids[] = {
 	{ .id = "927", .data = &gt911_chip_data },
 	{ .id = "928", .data = &gt911_chip_data },
 
+    { .id = "917D", .data = &gt967_chip_data },
 	{ .id = "912", .data = &gt967_chip_data },
 	{ .id = "9147", .data = &gt967_chip_data },
 	{ .id = "967", .data = &gt967_chip_data },
@@ -938,7 +938,7 @@ static void goodix_read_config(struct goodix_ts_data *ts)
 					ts->config, ts->chip->config_len);
 		if (error) {
             dev_err(&ts->client->dev,
-                    "ERROR_!@# goodix_i2c_read  %d", error);
+                    "ERROR_DEBUG goodix_i2c_read  %d", error);
 			ts->int_trigger_type = GOODIX_INT_TRIGGER;
 			ts->max_touch_num = GOODIX_MAX_CONTACTS;
 			return;
